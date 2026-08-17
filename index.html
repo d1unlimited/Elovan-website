@@ -531,30 +531,21 @@ footer{border-top:1px solid var(--border-soft);margin-top:var(--sp-6);padding:va
 <!-- sticky mobile CTA -->
 <div class="sticky-mobile-cta">
   <a class="btn btn-secondary" href="tel:+16132205445">Call for Details</a>
-  <button class="btn btn-primary" id="mobileChatBtn">Chat / WhatsApp</button>
+  <a class="btn btn-primary" id="mobileWhatsappBtn" href="#" target="_blank" rel="noopener">WhatsApp Us</a>
 </div>
 
-<!-- webchat -->
-<button class="chat-fab" id="chatFab" aria-label="Open live chat" aria-haspopup="dialog">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-9.1 8.35 8.5 8.5 0 0 1-3.24-.75L3 21l1.9-5.66A8.38 8.38 0 0 1 12.5 3a8.38 8.38 0 0 1 8.5 8.5z"/></svg>
-</button>
-<div class="chat-panel" id="chatPanel" role="dialog" aria-label="ELOVAN live chat">
-  <div class="chat-head">
-    <div><b>ELOVAN Support</b><br><span>● Online now</span></div>
-    <button class="chat-close" id="chatClose" aria-label="Close chat">×</button>
-  </div>
-  <div class="chat-depts" id="chatDepts">
-    <button class="active" data-dept="Sales">Sales</button>
-    <button data-dept="Shipping Help">Shipping Help</button>
-    <button data-dept="Car Availability">Availability</button>
-  </div>
-  <div class="chat-context" id="chatContext" style="display:none;"></div>
-  <div class="chat-body" id="chatBody"></div>
-  <div class="chat-input-row">
-    <input type="text" class="field" id="chatInput" placeholder="Type a message…" aria-label="Chat message">
-    <button class="btn btn-primary btn-sm" id="chatSend">Send</button>
-  </div>
-</div>
+<!-- Live chat is provided by the Tawk.to widget embedded near the end of <body>.
+     Tawk renders its own floating bubble automatically — no custom markup needed here. -->
+<script>
+  // Nudge Tawk's bubble up on mobile so it doesn't collide with the sticky bottom CTA bar.
+  var Tawk_API = Tawk_API || {};
+  Tawk_API.customStyle = {
+    visibility: {
+      desktop: { position: 'br', xOffset: 20, yOffset: 20 },
+      mobile:  { position: 'br', xOffset: 10, yOffset: 76 }
+    }
+  };
+</script>
 
 <!-- lightbox -->
 <div class="lightbox" id="lightbox" role="dialog" aria-label="Image gallery">
@@ -627,6 +618,28 @@ footer{border-top:1px solid var(--border-soft);margin-top:var(--sp-6);padding:va
 </footer>
 
 <script>
+/* ============================================================
+   CONTACT CHANNELS — WhatsApp + live chat (Tawk.to) helpers
+   ============================================================ */
+const WHATSAPP_NUMBER = '16132205445'; // no + or spaces, per wa.me format
+function waLink(message){
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+function openWhatsApp(message){
+  window.open(waLink(message || 'Hi ELOVAN, I have a question about a car.'), '_blank', 'noopener');
+}
+function openLiveChat(message){
+  if(window.Tawk_API && typeof Tawk_API.maximize === 'function'){
+    Tawk_API.maximize();
+    if(message && typeof Tawk_API.addTags === 'function'){
+      try{ Tawk_API.addTags([message]); }catch(e){}
+    }
+  } else {
+    // Tawk script hasn't finished loading yet — fall back to WhatsApp so the click still does something.
+    openWhatsApp(message);
+  }
+}
+
 /* ============================================================
    DEMO DATA MODEL
    ============================================================ */
@@ -1176,7 +1189,8 @@ function pageCarDetail(id){
           <div class="status-row">${statusBadge(car.availabilityStatus)} <span style="font-size:.82rem;color:var(--text-muted);">${car.availabilityStatus==='Available'?'Ready to request now':car.availabilityStatus==='Reserved'?'Currently on hold for another buyer':'No longer available'}</span></div>
           <p class="hint">${car.availabilityStatus==='Available'?'Submit a request and our team confirms details within one business day.':car.availabilityStatus==='Reserved'?'We can show you similar verified vehicles right away.':'Join the waitlist to be notified when a similar unit is sourced.'}</p>
           ${ctaForStatus(car)}
-          <button class="btn btn-secondary btn-block" style="margin-top:8px;" onclick="openChatWithCar('${car.id}')">${'Ask about this exact car (chat)'}</button>
+          <button class="btn btn-secondary btn-block" style="margin-top:8px;" onclick="openChatWithCar('${car.id}')">Ask about this exact car (live chat)</button>
+          <button class="btn btn-secondary btn-block" style="margin-top:8px;" onclick="openWhatsApp('Hi ELOVAN, I\u2019m asking about the ${car.year} ${car.make} ${car.model} (listing #${car.id}).')">Ask on WhatsApp</button>
           <a class="btn btn-ghost btn-block" style="margin-top:4px;" href="tel:+16132205445">Call: +1 613 220 5445</a>
         </div>
 
@@ -1368,9 +1382,10 @@ function pageContact(){
       <div>
         <div class="side-card">
           <h4>Direct contact</h4>
-          <p class="lede" style="font-size:.88rem;margin-bottom:10px;">Our team responds fastest over chat during business hours (WAT).</p>
+          <p class="lede" style="font-size:.88rem;margin-bottom:10px;">Our team responds fastest over WhatsApp and live chat during business hours (WAT).</p>
           <a class="btn btn-primary btn-block" href="tel:+16132205445" style="margin-bottom:8px;">Call: +1 613 220 5445</a>
-          <button class="btn btn-secondary btn-block" onclick="document.getElementById('chatFab').click()">Start a live chat</button>
+          <button class="btn btn-secondary btn-block" style="margin-bottom:8px;" onclick="openWhatsApp('Hi ELOVAN, I\u2019d like to get in touch.')">WhatsApp us</button>
+          <button class="btn btn-ghost btn-block" onclick="openLiveChat()">Start a live chat</button>
         </div>
         <div class="side-card">
           <h4>Office &amp; sourcing hubs</h4>
@@ -1467,6 +1482,16 @@ function leadBlockHTML(ctx){
     </div>
   </div>`;
 }
+/* ============================================================
+   FORM DELIVERY — Formspree
+   Submissions email to d1unlimited12@yahoo.ca once FORMSPREE_ENDPOINT
+   below is set to your real form ID from https://formspree.io.
+   Until then, forms fall back to opening a pre-filled email draft so
+   nothing is silently lost.
+   ============================================================ */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/your_form_id'; // TODO: replace your_form_id after creating a Formspree form for d1unlimited12@yahoo.ca
+const FALLBACK_EMAIL = 'd1unlimited12@yahoo.ca';
+
 function wireLeadForms(){
   document.querySelectorAll('.lead-form').forEach(form=>{
     const uid=form.id;
@@ -1484,7 +1509,7 @@ function wireLeadForms(){
     form.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',updateProgress));
     updateProgress();
 
-    form.addEventListener('submit',e=>{
+    form.addEventListener('submit',async e=>{
       e.preventDefault();
       let ok=true;
       fields.forEach(el=>{
@@ -1496,9 +1521,43 @@ function wireLeadForms(){
         if(!valid) ok=false;
       });
       if(!ok){ showToast('Please complete the required fields'); return; }
-      form.style.display='none';
-      document.getElementById(uid+'_success').style.display='block';
-      showToast('Quote request submitted');
+
+      const payload = {};
+      form.querySelectorAll('input,select,textarea').forEach(el=>{
+        const label = el.closest('.field-wrap')?.querySelector('label')?.textContent || el.id;
+        payload[label] = el.value;
+      });
+      payload['Page context'] = form.dataset.ctx;
+      payload['Car of interest ID'] = form.dataset.car || payload['Car of interest'] || '';
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      const usingRealEndpoint = !FORMSPREE_ENDPOINT.includes('your_form_id');
+
+      try{
+        if(usingRealEndpoint){
+          const res = await fetch(FORMSPREE_ENDPOINT, {
+            method:'POST',
+            headers:{ 'Accept':'application/json', 'Content-Type':'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if(!res.ok) throw new Error('Formspree request failed');
+        } else {
+          // Fallback until FORMSPREE_ENDPOINT is configured: open a pre-filled email draft.
+          const bodyLines = Object.entries(payload).map(([k,v])=>`${k}: ${v}`).join('%0D%0A');
+          window.location.href = `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent('ELOVAN quote request')}&body=${bodyLines}`;
+        }
+        form.style.display='none';
+        document.getElementById(uid+'_success').style.display='block';
+        showToast(usingRealEndpoint ? 'Quote request sent' : 'Opening your email app to send this request');
+      }catch(err){
+        showToast('Something went wrong sending this — please try WhatsApp or call instead');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }
     });
   });
 }
@@ -1512,62 +1571,21 @@ function openLeadFor(carId, mode){
 }
 
 /* ============================================================
-   WEBCHAT WIDGET
+   WHATSAPP + LIVE CHAT WIRING
+   Real live chat is handled by the Tawk.to widget (embedded at the
+   end of <body>) — it renders its own floating bubble and connects
+   to the ELOVAN Tawk dashboard/app in real time.
+   WhatsApp buttons open wa.me with a pre-filled message.
    ============================================================ */
-const chatFab=document.getElementById('chatFab');
-const chatPanel=document.getElementById('chatPanel');
-const chatBody=document.getElementById('chatBody');
-const chatContext=document.getElementById('chatContext');
-
-function botReply(text){
-  state.chatHistory.push({from:'bot',text});
-  chatBody.insertAdjacentHTML('beforeend',`<div class="msg bot">${text}</div>`);
-  chatBody.scrollTop=chatBody.scrollHeight;
-}
-function userMsg(text){
-  state.chatHistory.push({from:'user',text});
-  chatBody.insertAdjacentHTML('beforeend',`<div class="msg user">${text}</div>`);
-  chatBody.scrollTop=chatBody.scrollHeight;
-}
-function openChat(){
-  chatPanel.classList.add('open');
-  if(!chatBody.children.length){
-    botReply(`Hi! You're chatting with ELOVAN ${state.chatDept}. How can we help today?`);
-  }
-}
 function openChatWithCar(carId){
   const car=CARS.find(c=>c.id===carId);
-  state.chatCarContext=car;
-  chatContext.style.display='block';
-  chatContext.textContent = `CONTEXT: ${car.year} ${car.make} ${car.model} · #${car.id}`;
-  openChat();
-  botReply(`I can see you're asking about the ${car.year} ${car.make} ${car.model}. It's currently ${car.availabilityStatus}. What would you like to know — pricing, inspection details, or shipping timeline?`);
+  if(!car) return;
+  openLiveChat(`${car.year} ${car.make} ${car.model} (#${car.id})`);
 }
-chatFab.addEventListener('click',openChat);
-document.getElementById('mobileChatBtn').addEventListener('click',openChat);
-document.getElementById('chatClose').addEventListener('click',()=>chatPanel.classList.remove('open'));
-document.getElementById('footerWhatsapp').addEventListener('click',e=>{e.preventDefault();openChat();});
-document.querySelectorAll('#chatDepts button').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('#chatDepts button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    state.chatDept=btn.dataset.dept;
-    botReply(`You're now connected with ${btn.dataset.dept}. What can we help with?`);
-  });
-});
-function sendChat(){
-  const input=document.getElementById('chatInput');
-  const val=input.value.trim();
-  if(!val) return;
-  userMsg(val);
-  input.value='';
-  setTimeout(()=>{
-    // simple canned response demo — falls back to a message form if "unavailable" is simulated
-    botReply(`Thanks — a ${state.chatDept} specialist will follow up here shortly. In the meantime, you can also request a callback using the quote form.`);
-  },500);
-}
-document.getElementById('chatSend').addEventListener('click',sendChat);
-document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat();});
+const mobileWa=document.getElementById('mobileWhatsappBtn');
+if(mobileWa) mobileWa.addEventListener('click',e=>{ e.preventDefault(); openWhatsApp('Hi ELOVAN, I have a question about a car.'); });
+const footerWa=document.getElementById('footerWhatsapp');
+if(footerWa) footerWa.addEventListener('click',e=>{ e.preventDefault(); openWhatsApp('Hi ELOVAN, I have a question about a car.'); });
 
 /* ============================================================
    NAV / MOBILE MENU / MISC WIRES
@@ -1643,5 +1661,18 @@ window.addEventListener('hashchange',render);
 window.addEventListener('DOMContentLoaded',render);
 render();
 </script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a83706f5981892f72ddec04/1k08mudan';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

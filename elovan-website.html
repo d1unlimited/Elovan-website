@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELOVAN — Verified Import Cars, Europe &amp; North America to Nigeria</title>
+<meta name="description" content="ELOVAN sources, verifies and ships cars from Europe and North America to Nigeria. Transparent pricing, inspected vehicles, tracked delivery.">
+<meta property="og:title" content="ELOVAN — Verified Import Cars to Nigeria">
+<meta property="og:description" content="Browse inspected cars from Europe and North America. Transparent shipping, real reviews, direct chat with our team.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ELOVAN DESIGN SYSTEM — tokens
+   ============================================================ */
+:root{
+  --bg:#0A0E13;
+  --bg-alt:#0D1319;
+  --surface:#131A22;
+  --surface-2:#1A2530;
+  --surface-3:#212E3B;
+  --border:#223040;
+  --border-soft:#1A2530;
+
+  --teal:#16C7B0;
+  --teal-strong:#22E5CB;
+  --teal-dim:rgba(22,199,176,.14);
+  --teal-line:rgba(22,199,176,.35);
+
+  --gold:#C9A961;
+  --gold-dim:rgba(201,169,97,.14);
+
+  --text:#EFF4F8;
+  --text-muted:#93A6B8;
+  --text-faint:#5A6D80;
+
+  --success:#34D399;
+  --warn:#F2B84B;
+  --error:#F2635F;
+
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+
+  --radius-sm:6px;
+  --radius:12px;
+  --radius-lg:20px;
+
+  --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:32px; --sp-5:48px; --sp-6:64px; --sp-7:96px;
+
+  --shadow-card:0 8px 30px rgba(0,0,0,.35);
+  --ease:cubic-bezier(.16,.84,.44,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(ellipse 1200px 600px at 80% -10%, rgba(22,199,176,.08), transparent 60%),
+    radial-gradient(ellipse 900px 500px at 0% 10%, rgba(201,169,97,.05), transparent 55%),
+    var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+img,svg{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+ul{list-style:none;}
+input,select,textarea{font-family:inherit;}
+
+:focus-visible{outline:2px solid var(--teal-strong);outline-offset:2px;border-radius:4px;}
+
+.container{max-width:1240px;margin:0 auto;padding:0 var(--sp-3);}
+@media(max-width:640px){.container{padding:0 var(--sp-2);}}
+
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:11.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--teal);
+  display:flex;align-items:center;gap:8px;
+}
+.eyebrow::before{content:'';width:16px;height:1px;background:var(--teal);display:inline-block;}
+
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;color:var(--text);}
+.h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.03;font-weight:700;}
+.h2{font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.08;}
+.h3{font-size:1.25rem;line-height:1.2;}
+.lede{color:var(--text-muted);font-size:1.05rem;line-height:1.65;max-width:56ch;}
+.mono{font-family:var(--font-mono);}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 24px;border-radius:999px;font-weight:600;font-size:.92rem;
+  border:1px solid transparent;transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease),border-color .18s var(--ease);
+  white-space:nowrap;
+}
+.btn-primary{background:linear-gradient(135deg,var(--teal-strong),var(--teal));color:#04120F;box-shadow:0 0 0 0 rgba(22,199,176,.5);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(22,199,176,.55);}
+.btn-secondary{background:transparent;border-color:var(--border);color:var(--text);}
+.btn-secondary:hover{border-color:var(--teal-line);background:var(--teal-dim);}
+.btn-ghost{background:transparent;color:var(--text-muted);padding:10px 14px;}
+.btn-ghost:hover{color:var(--text);}
+.btn-gold{background:linear-gradient(135deg,#DEC08A,var(--gold));color:#1C1404;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(201,169,97,.5);}
+.btn-sm{padding:9px 16px;font-size:.82rem;}
+.btn-block{width:100%;}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important;}
+.btn-icon{width:38px;height:38px;padding:0;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);}
+.btn-icon:hover{border-color:var(--teal-line);color:var(--teal);}
+.btn-icon.active{color:var(--gold);border-color:var(--gold);background:var(--gold-dim);}
+
+/* ---------- glass panel ---------- */
+.glass{
+  background:linear-gradient(180deg,rgba(26,37,48,.65),rgba(19,26,34,.65));
+  backdrop-filter:blur(14px);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-lg);
+}
+
+/* ============================================================
+   SIGNATURE ELEMENT — telemetry corner-bracket frame
+   used on: hero showcase, car card media, gallery, stat blocks
+   ============================================================ */
+.hud-frame{position:relative;}
+.hud-frame::before,.hud-frame::after,
+.hud-frame .hud-c1,.hud-frame .hud-c2{
+  content:'';position:absolute;width:18px;height:18px;
+  border:1.5px solid var(--teal);
+  opacity:0;transition:opacity .35s var(--ease), width .35s var(--ease), height .35s var(--ease);
+  pointer-events:none;
+}
+.hud-frame::before{top:8px;left:8px;border-right:none;border-bottom:none;}
+.hud-frame::after{bottom:8px;right:8px;border-left:none;border-top:none;}
+.hud-frame .hud-c1{top:8px;right:8px;border-left:none;border-bottom:none;}
+.hud-frame .hud-c2{bottom:8px;left:8px;border-right:none;border-top:none;}
+.hud-frame:hover::before,.hud-frame:hover::after,
+.hud-frame:hover .hud-c1,.hud-frame:hover .hud-c2,
+.hud-frame.hud-active::before,.hud-frame.hud-active::after,
+.hud-frame.hud-active .hud-c1,.hud-frame.hud-active .hud-c2{opacity:1;width:22px;height:22px;}
+.hud-frame .hud-scan{
+  position:absolute;left:0;right:0;height:1px;top:0;
+  background:linear-gradient(90deg,transparent,var(--teal-strong),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.hud-frame:hover .hud-scan{opacity:.7;animation:scan 1.8s linear infinite;}
+@keyframes scan{0%{top:6%;}100%{top:94%;}}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(10,14,19,.78);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-soft);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:1.25rem;letter-spacing:.01em;}
+.logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--teal-strong),var(--gold));display:flex;align-items:center;justify-content:center;color:#04120F;font-weight:800;font-family:var(--font-mono);font-size:.95rem;}
+.nav-links{display:flex;align-items:center;gap:2px;}
+.nav-links a{padding:10px 14px;font-size:.9rem;color:var(--text-muted);border-radius:999px;transition:.18s;font-weight:500;}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--surface-2);}
+.nav-cta{display:flex;align-items:center;gap:10px;}
+.call-chip{display:flex;align-items:center;gap:8px;padding:9px 14px 9px 10px;border:1px solid var(--border);border-radius:999px;font-family:var(--font-mono);font-size:.82rem;color:var(--text);transition:.18s;}
+.call-chip:hover{border-color:var(--teal-line);color:var(--teal-strong);}
+.call-dot{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 0 3px rgba(52,211,153,.18);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.nav-toggle{display:none;background:none;border:1px solid var(--border);border-radius:8px;width:40px;height:40px;color:var(--text);align-items:center;justify-content:center;}
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .nav-toggle{display:flex;}
+}
+.mobile-menu{display:none;flex-direction:column;padding:var(--sp-2) 0;border-top:1px solid var(--border-soft);gap:4px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{padding:12px 8px;color:var(--text-muted);font-weight:500;border-radius:8px;}
+.mobile-menu a.active{color:var(--teal-strong);}
+
+/* sticky bottom mobile CTA */
+.sticky-mobile-cta{
+  position:fixed;bottom:0;left:0;right:0;z-index:55;display:none;
+  background:rgba(10,14,19,.92);backdrop-filter:blur(14px);
+  border-top:1px solid var(--border-soft);
+  padding:10px 14px;gap:10px;
+}
+@media(max-width:640px){.sticky-mobile-cta{display:flex;}}
+.sticky-mobile-cta a,.sticky-mobile-cta button{flex:1;}
+
+/* ---------- hero ---------- */
+.hero{padding:var(--sp-6) 0 var(--sp-5);position:relative;overflow:hidden;}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--sp-6);align-items:center;}
+@media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:var(--sp-4);}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--border);border-radius:999px;font-size:.78rem;color:var(--text-muted);margin-bottom:var(--sp-3);font-family:var(--font-mono);}
+.hero h1{margin:var(--sp-2) 0 var(--sp-3);}
+.hero h1 .accent{background:linear-gradient(120deg,var(--teal-strong),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero-ctas{display:flex;gap:12px;margin-top:var(--sp-4);flex-wrap:wrap;}
+.hero-stats{display:flex;gap:var(--sp-5);margin-top:var(--sp-5);flex-wrap:wrap;}
+.hero-stat b{display:block;font-family:var(--font-mono);font-size:1.7rem;color:var(--teal-strong);font-weight:600;}
+.hero-stat span{font-size:.8rem;color:var(--text-faint);}
+
+.hero-visual{position:relative;aspect-ratio:4/3;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);}
+.hero-visual .plate{position:absolute;inset:0;background:
+  linear-gradient(160deg,#1A2530 0%, #0D1319 55%, #101820 100%);
+}
+.hero-visual .glow{position:absolute;width:70%;height:70%;left:15%;top:15%;background:radial-gradient(circle,rgba(22,199,176,.28),transparent 70%);filter:blur(10px);animation:float 6s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero-visual .carsvg{position:relative;z-index:2;width:78%;margin:11% auto 0;filter:drop-shadow(0 20px 40px rgba(0,0,0,.5));}
+.hero-visual .hud-readout{position:absolute;bottom:18px;left:18px;right:18px;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.72rem;color:var(--teal-strong);opacity:.85;}
+
+/* ---------- how it works stepper ---------- */
+.section{padding:var(--sp-6) 0;}
+.section-head{margin-bottom:var(--sp-4);}
+.section-head .eyebrow{margin-bottom:10px;}
+.stepper{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-2);margin-top:var(--sp-4);}
+@media(max-width:900px){.stepper{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.stepper{grid-template-columns:1fr;}}
+.step{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:var(--sp-3);position:relative;transition:.25s;}
+.step:hover{border-color:var(--teal-line);transform:translateY(-3px);}
+.step .num{font-family:var(--font-mono);color:var(--teal);font-size:.78rem;letter-spacing:.08em;}
+.step h4{margin:10px 0 8px;font-size:1rem;}
+.step p{color:var(--text-muted);font-size:.88rem;line-height:1.55;}
+
+/* ---------- featured / grid ---------- */
+.grid-cars{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);}
+@media(max-width:960px){.grid-cars{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.grid-cars{grid-template-columns:1fr;}}
+.grid-cars.list-view{grid-template-columns:1fr;}
+
+.car-card{
+  background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);
+  overflow:hidden;transition:transform .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease);
+  display:flex;flex-direction:column;position:relative;
+}
+.car-card:hover{transform:translateY(-4px);border-color:var(--teal-line);box-shadow:var(--shadow-card);}
+.grid-cars.list-view .car-card{flex-direction:row;}
+.grid-cars.list-view .car-media{width:280px;flex:none;aspect-ratio:auto;}
+.car-media{aspect-ratio:4/3;position:relative;overflow:hidden;}
+.car-media .plate{position:absolute;inset:0;}
+.car-media svg{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:72%;opacity:.92;}
+.car-badges{position:absolute;top:10px;left:10px;display:flex;gap:6px;z-index:3;}
+.badge{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.05em;padding:4px 9px;border-radius:999px;text-transform:uppercase;font-weight:600;}
+.badge-available{background:rgba(52,211,153,.16);color:var(--success);border:1px solid rgba(52,211,153,.35);}
+.badge-reserved{background:rgba(242,184,75,.15);color:var(--warn);border:1px solid rgba(242,184,75,.35);}
+.badge-sold{background:rgba(242,99,95,.14);color:var(--error);border:1px solid rgba(242,99,95,.35);}
+.fav-btn{position:absolute;top:10px;right:10px;z-index:3;width:34px;height:34px;border-radius:50%;background:rgba(10,14,19,.55);backdrop-filter:blur(6px);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:.2s;}
+.fav-btn:hover{color:var(--gold);}
+.fav-btn.active{color:var(--gold);border-color:var(--gold);}
+.car-body{padding:var(--sp-2) var(--sp-2) var(--sp-3);display:flex;flex-direction:column;gap:8px;flex:1;}
+.car-title{font-family:var(--font-display);font-weight:600;font-size:1.02rem;}
+.car-sub{font-size:.8rem;color:var(--text-faint);}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px;}
+.spec-chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);background:var(--surface-2);border:1px solid var(--border-soft);padding:4px 8px;border-radius:6px;}
+.spec-chip svg{width:12px;height:12px;stroke:var(--teal);}
+.car-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:8px;border-top:1px solid var(--border-soft);}
+.car-price{font-family:var(--font-mono);font-weight:600;color:var(--text);font-size:1.02rem;}
+.car-price small{display:block;font-size:.66rem;color:var(--text-faint);font-weight:400;}
+.compare-check{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text-faint);margin-top:6px;}
+.stars{color:var(--gold);font-size:.78rem;display:flex;align-items:center;gap:4px;font-family:var(--font-mono);}
+
+/* skeleton */
+.skeleton{background:linear-gradient(100deg,var(--surface) 30%,var(--surface-2) 50%,var(--surface) 70%);background-size:300% 100%;animation:shimmer 1.4s infinite;border-radius:var(--radius);}
+@keyframes shimmer{0%{background-position:150% 0}100%{background-position:-150% 0}}
+.skel-card{height:340px;}
+
+/* empty state */
+.empty-state{text-align:center;padding:var(--sp-6) var(--sp-3);border:1px dashed var(--border);border-radius:var(--radius);}
+.empty-state svg{width:52px;height:52px;stroke:var(--text-faint);margin:0 auto var(--sp-2);}
+.empty-state h4{margin-bottom:6px;}
+.empty-state p{color:var(--text-muted);font-size:.9rem;max-width:40ch;margin:0 auto var(--sp-3);}
+
+/* ---------- inventory / filters ---------- */
+.inv-layout{display:grid;grid-template-columns:270px 1fr;gap:var(--sp-4);align-items:flex-start;}
+@media(max-width:900px){.inv-layout{grid-template-columns:1fr;}}
+.filters-panel{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:var(--sp-3);position:sticky;top:90px;}
+@media(max-width:900px){.filters-panel{position:static;}}
+.filters-panel h4{font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);margin-bottom:var(--sp-2);font-family:var(--font-mono);font-weight:500;}
+.filter-group{margin-bottom:var(--sp-3);}
+.filter-group label{display:block;font-size:.8rem;color:var(--text-muted);margin-bottom:6px;font-weight:500;}
+.filter-row{display:flex;gap:8px;}
+.field{
+  width:100%;background:var(--bg-alt);border:1px solid var(--border);color:var(--text);
+  padding:10px 12px;border-radius:8px;font-size:.85rem;transition:.2s;
+}
+.field:focus{border-color:var(--teal);background:var(--surface-2);}
+.field.err{border-color:var(--error);}
+select.field{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2393A6B8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
+.chip-toggle-row{display:flex;flex-wrap:wrap;gap:6px;}
+.chip-toggle{padding:6px 12px;border-radius:999px;border:1px solid var(--border);font-size:.76rem;color:var(--text-muted);background:transparent;transition:.18s;}
+.chip-toggle.active{border-color:var(--teal);color:var(--teal-strong);background:var(--teal-dim);}
+.filters-panel .clear-btn{width:100%;margin-top:4px;}
+
+.toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-3);gap:12px;flex-wrap:wrap;}
+.toolbar-left{display:flex;align-items:center;gap:10px;}
+.results-count{font-family:var(--font-mono);font-size:.82rem;color:var(--text-muted);}
+.toolbar-right{display:flex;align-items:center;gap:8px;}
+.view-toggle{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.view-toggle button{padding:8px 10px;background:transparent;color:var(--text-faint);border:none;}
+.view-toggle button.active{background:var(--surface-2);color:var(--teal);}
+.mobile-filter-btn{display:none;}
+@media(max-width:900px){.mobile-filter-btn{display:inline-flex;}.filters-panel{display:none;}.filters-panel.open{display:block;margin-bottom:var(--sp-3);}}
+
+.compare-bar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(140%);z-index:56;
+  background:var(--surface-2);border:1px solid var(--teal-line);border-radius:999px;padding:10px 10px 10px 18px;
+  display:flex;align-items:center;gap:14px;box-shadow:0 20px 50px -10px rgba(0,0,0,.6);transition:transform .3s var(--ease);}
+.compare-bar.show{transform:translateX(-50%) translateY(0);}
+.compare-bar span{font-size:.82rem;color:var(--text-muted);font-family:var(--font-mono);}
+
+/* ---------- car detail ---------- */
+.detail-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:var(--sp-4);align-items:flex-start;}
+@media(max-width:960px){.detail-grid{grid-template-columns:1fr;}}
+.gallery-main{aspect-ratio:16/10;border-radius:var(--radius-lg);overflow:hidden;position:relative;border:1px solid var(--border);cursor:zoom-in;}
+.gallery-main .plate{position:absolute;inset:0;}
+.gallery-main svg{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:60%;}
+.gallery-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px;}
+.thumb{width:84px;height:64px;flex:none;border-radius:8px;overflow:hidden;border:1.5px solid var(--border);position:relative;opacity:.6;transition:.2s;}
+.thumb.active{opacity:1;border-color:var(--teal);}
+.thumb .plate{position:absolute;inset:0;}
+.thumb svg{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:60%;}
+
+.detail-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:6px;}
+.price-block{text-align:right;}
+.price-block .amt{font-family:var(--font-mono);font-size:1.7rem;font-weight:600;color:var(--teal-strong);}
+.price-block small{color:var(--text-faint);font-size:.72rem;}
+
+.avail-module{border:1px solid var(--border-soft);background:var(--surface);border-radius:var(--radius);padding:var(--sp-3);margin-top:var(--sp-3);}
+.avail-module .status-row{display:flex;align-items:center;gap:10px;margin-bottom:var(--sp-2);}
+.avail-module p.hint{color:var(--text-muted);font-size:.85rem;margin-bottom:var(--sp-2);}
+
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:var(--sp-3);}
+@media(max-width:520px){.spec-grid{grid-template-columns:repeat(2,1fr);}}
+.spec-tile{background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;padding:12px;}
+.spec-tile svg{width:16px;height:16px;stroke:var(--teal);margin-bottom:8px;}
+.spec-tile b{display:block;font-size:.88rem;font-family:var(--font-mono);}
+.spec-tile span{font-size:.7rem;color:var(--text-faint);}
+
+.notes-block{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:var(--sp-3);margin-top:var(--sp-3);}
+.notes-block h4{margin-bottom:8px;font-size:.95rem;}
+.notes-block ul{display:flex;flex-direction:column;gap:6px;}
+.notes-block li{font-size:.85rem;color:var(--text-muted);display:flex;gap:8px;}
+.notes-block li::before{content:'✓';color:var(--teal);font-weight:700;}
+
+.side-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:var(--sp-3);margin-bottom:var(--sp-3);}
+.side-card h4{margin-bottom:12px;font-size:.98rem;}
+
+/* reviews */
+.review-summary{display:flex;align-items:center;gap:16px;margin-top:var(--sp-2);}
+.review-summary .score{font-family:var(--font-mono);font-size:2.2rem;font-weight:600;color:var(--gold);}
+.review-card{border-top:1px solid var(--border-soft);padding:var(--sp-2) 0;}
+.review-card .rh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.review-card .who{font-weight:600;font-size:.88rem;}
+.review-card .when{font-size:.72rem;color:var(--text-faint);font-family:var(--font-mono);}
+.review-card p{font-size:.87rem;color:var(--text-muted);line-height:1.55;}
+.helpful-row{display:flex;align-items:center;gap:8px;margin-top:8px;}
+.helpful-row button{font-size:.74rem;color:var(--text-faint);background:none;border:1px solid var(--border);border-radius:999px;padding:4px 10px;display:flex;align-items:center;gap:5px;}
+.helpful-row button:hover{color:var(--teal);border-color:var(--teal-line);}
+
+/* forms */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:560px){.form-grid{grid-template-columns:1fr;}}
+.field-wrap{display:flex;flex-direction:column;gap:6px;}
+.field-wrap label{font-size:.8rem;color:var(--text-muted);font-weight:500;}
+.field-wrap.span-2{grid-column:1/-1;}
+.error-text{font-size:.74rem;color:var(--error);display:none;}
+.error-text.show{display:block;}
+.progress-track{height:4px;background:var(--surface-2);border-radius:99px;overflow:hidden;margin-bottom:var(--sp-3);}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));width:20%;transition:width .3s var(--ease);}
+.success-box{text-align:center;padding:var(--sp-4) var(--sp-2);}
+.success-box .check{width:56px;height:56px;border-radius:50%;background:var(--teal-dim);border:1px solid var(--teal-line);display:flex;align-items:center;justify-content:center;margin:0 auto var(--sp-2);}
+.success-box .check svg{stroke:var(--teal);width:26px;height:26px;}
+
+/* faq accordion */
+.accordion-item{border-bottom:1px solid var(--border-soft);}
+.accordion-item button{width:100%;text-align:left;padding:var(--sp-2) 4px;background:none;border:none;color:var(--text);display:flex;justify-content:space-between;align-items:center;font-size:.98rem;font-weight:600;font-family:var(--font-display);}
+.accordion-item .plus{transition:transform .25s var(--ease);color:var(--teal);font-size:1.1rem;}
+.accordion-item.open .plus{transform:rotate(45deg);}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .3s var(--ease);}
+.accordion-item.open .accordion-body{max-height:300px;}
+.accordion-body p{color:var(--text-muted);font-size:.9rem;padding:0 4px var(--sp-2);line-height:1.6;}
+
+/* testimonials */
+.testi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);}
+@media(max-width:900px){.testi-row{grid-template-columns:1fr;}}
+.testi-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:var(--sp-3);}
+.testi-card .stars{margin-bottom:10px;}
+.testi-card p{color:var(--text-muted);font-size:.9rem;line-height:1.6;margin-bottom:var(--sp-2);}
+.testi-who{display:flex;align-items:center;gap:10px;}
+.testi-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--gold));display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:700;font-size:.78rem;color:#04120F;}
+.testi-who b{font-size:.85rem;display:block;}
+.testi-who span{font-size:.72rem;color:var(--text-faint);}
+
+/* shipping timeline table */
+.timeline-widget{display:flex;gap:0;margin-top:var(--sp-4);border:1px solid var(--border-soft);border-radius:var(--radius);overflow:hidden;}
+.timeline-tabs{display:flex;flex-direction:column;width:220px;border-right:1px solid var(--border-soft);background:var(--surface);}
+@media(max-width:760px){.timeline-widget{flex-direction:column;}.timeline-tabs{width:100%;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border-soft);}}
+.timeline-tabs button{text-align:left;padding:14px 16px;background:none;border:none;color:var(--text-faint);font-size:.85rem;font-weight:600;border-left:3px solid transparent;white-space:nowrap;}
+.timeline-tabs button.active{color:var(--teal-strong);border-left-color:var(--teal);background:var(--surface-2);}
+.timeline-panel{padding:var(--sp-3);flex:1;background:var(--bg-alt);}
+.timeline-panel h4{margin-bottom:8px;}
+.timeline-panel p{color:var(--text-muted);font-size:.88rem;margin-bottom:10px;}
+.factor-list{display:flex;flex-direction:column;gap:8px;}
+.factor-list li{display:flex;justify-content:space-between;font-size:.83rem;padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border-soft);}
+.factor-list li b{color:var(--gold);font-family:var(--font-mono);}
+
+.checklist-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:var(--sp-3);}
+@media(max-width:640px){.checklist-grid{grid-template-columns:1fr;}}
+.check-item{display:flex;gap:10px;background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;padding:12px;font-size:.85rem;color:var(--text-muted);}
+.check-item svg{flex:none;width:16px;height:16px;stroke:var(--teal);margin-top:2px;}
+
+/* trust footer */
+footer{border-top:1px solid var(--border-soft);margin-top:var(--sp-6);padding:var(--sp-5) 0 var(--sp-4);background:var(--bg-alt);}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:var(--sp-4);}
+@media(max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.footer-grid{grid-template-columns:1fr;}}
+.footer-grid h5{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);margin-bottom:14px;font-family:var(--font-mono);font-weight:500;}
+.footer-grid ul{display:flex;flex-direction:column;gap:10px;}
+.footer-grid a{color:var(--text-muted);font-size:.87rem;}
+.footer-grid a:hover{color:var(--teal);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:var(--sp-5);padding-top:var(--sp-3);border-top:1px solid var(--border-soft);font-size:.78rem;color:var(--text-faint);flex-wrap:wrap;gap:10px;}
+.newsletter{display:flex;gap:8px;margin-top:8px;}
+.newsletter input{flex:1;}
+
+/* lead capture block */
+.lead-block{background:linear-gradient(135deg,var(--surface-2),var(--surface));border:1px solid var(--teal-line);border-radius:var(--radius-lg);padding:var(--sp-4);position:relative;overflow:hidden;}
+.lead-block::after{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(22,199,176,.15),transparent 70%);right:-80px;top:-80px;}
+.lead-inner{display:grid;grid-template-columns:1fr 1.3fr;gap:var(--sp-4);position:relative;z-index:2;}
+@media(max-width:800px){.lead-inner{grid-template-columns:1fr;}}
+
+/* webchat */
+.chat-fab{position:fixed;bottom:24px;right:24px;z-index:70;width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,var(--teal-strong),var(--teal));display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 30px -6px rgba(22,199,176,.55);border:none;color:#04120F;}
+@media(max-width:640px){.chat-fab{bottom:76px;}}
+.chat-fab svg{width:26px;height:26px;}
+.chat-panel{position:fixed;bottom:96px;right:24px;z-index:70;width:360px;max-width:90vw;height:520px;max-height:75vh;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);display:none;flex-direction:column;overflow:hidden;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);}
+.chat-panel.open{display:flex;}
+@media(max-width:640px){.chat-panel{bottom:132px;right:12px;}}
+.chat-head{padding:14px 16px;border-bottom:1px solid var(--border-soft);display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);}
+.chat-head b{font-size:.9rem;}
+.chat-head span{font-size:.72rem;color:var(--success);display:flex;align-items:center;gap:5px;}
+.chat-close{background:none;border:none;color:var(--text-faint);font-size:1.2rem;}
+.chat-depts{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--border-soft);}
+.chat-depts button{flex:1;font-size:.72rem;padding:7px 4px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-muted);}
+.chat-depts button.active{border-color:var(--teal);color:var(--teal-strong);background:var(--teal-dim);}
+.chat-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.msg{max-width:82%;padding:10px 13px;border-radius:14px;font-size:.85rem;line-height:1.5;}
+.msg.bot{background:var(--surface-2);border-bottom-left-radius:4px;align-self:flex-start;color:var(--text-muted);}
+.msg.user{background:var(--teal-dim);border:1px solid var(--teal-line);border-bottom-right-radius:4px;align-self:flex-end;color:var(--text);}
+.chat-context{font-size:.7rem;color:var(--gold);font-family:var(--font-mono);padding:0 14px 8px;}
+.chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border-soft);}
+.chat-input-row input{flex:1;}
+.chat-fallback{padding:14px;font-size:.8rem;color:var(--text-muted);}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(5,7,10,.92);backdrop-filter:blur(6px);z-index:90;display:none;align-items:center;justify-content:center;padding:var(--sp-3);}
+.lightbox.open{display:flex;}
+.lightbox-stage{position:relative;max-width:900px;width:100%;aspect-ratio:16/10;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
+.lightbox-stage .plate{position:absolute;inset:0;}
+.lightbox-stage svg{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:55%;}
+.lightbox-close{position:absolute;top:-46px;right:0;background:none;border:none;color:var(--text);font-size:1.6rem;}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(10,14,19,.6);border:1px solid var(--border);color:var(--text);width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.lightbox-prev{left:-56px;}.lightbox-next{right:-56px;}
+@media(max-width:760px){.lightbox-prev{left:6px;}.lightbox-next{right:6px;}.lightbox-close{top:6px;right:6px;background:rgba(0,0,0,.4);border-radius:50%;width:36px;height:36px;}}
+.lightbox-count{position:absolute;bottom:-32px;left:0;font-family:var(--font-mono);font-size:.8rem;color:var(--text-faint);}
+
+/* compare modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(5,7,10,.85);z-index:90;display:none;align-items:center;justify-content:center;padding:var(--sp-3);}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);max-width:900px;width:100%;max-height:85vh;overflow:auto;padding:var(--sp-4);}
+.modal-box .mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-3);}
+.compare-table{width:100%;border-collapse:collapse;}
+.compare-table th,.compare-table td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border-soft);font-size:.85rem;vertical-align:top;}
+.compare-table th{color:var(--text-faint);font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;font-weight:500;}
+
+/* toast */
+.toast{position:fixed;bottom:24px;left:24px;z-index:95;background:var(--surface-2);border:1px solid var(--teal-line);border-radius:10px;padding:12px 16px;font-size:.85rem;display:flex;align-items:center;gap:10px;transform:translateY(140%);transition:transform .3s var(--ease);}
+.toast.show{transform:translateY(0);}
+
+.page{display:none;}
+.page.active{display:block;}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;}}
+.divider{height:1px;background:var(--border-soft);margin:var(--sp-5) 0;}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#/" class="logo"><span class="logo-mark">EV</span> ELOVAN</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#/" data-route="/">Home</a>
+      <a href="#/cars" data-route="/cars">Inventory</a>
+      <a href="#/how-it-works" data-route="/how-it-works">How It Works</a>
+      <a href="#/shipping" data-route="/shipping">Shipping</a>
+      <a href="#/faq" data-route="/faq">FAQ</a>
+      <a href="#/contact" data-route="/contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a class="call-chip" href="tel:+16132205445" aria-label="Call ELOVAN"><span class="call-dot"></span> +1 613 220 5445</a>
+      <a class="btn btn-primary btn-sm" href="#/cars">Browse Cars</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#/" data-route="/">Home</a>
+      <a href="#/cars" data-route="/cars">Inventory</a>
+      <a href="#/how-it-works" data-route="/how-it-works">How It Works</a>
+      <a href="#/shipping" data-route="/shipping">Shipping</a>
+      <a href="#/faq" data-route="/faq">FAQ</a>
+      <a href="#/contact" data-route="/contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main id="app"></main>
+
+<!-- sticky mobile CTA -->
+<div class="sticky-mobile-cta">
+  <a class="btn btn-secondary" href="tel:+16132205445">Call for Details</a>
+  <button class="btn btn-primary" id="mobileChatBtn">Chat / WhatsApp</button>
+</div>
+
+<!-- webchat -->
+<button class="chat-fab" id="chatFab" aria-label="Open live chat" aria-haspopup="dialog">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-9.1 8.35 8.5 8.5 0 0 1-3.24-.75L3 21l1.9-5.66A8.38 8.38 0 0 1 12.5 3a8.38 8.38 0 0 1 8.5 8.5z"/></svg>
+</button>
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="ELOVAN live chat">
+  <div class="chat-head">
+    <div><b>ELOVAN Support</b><br><span>● Online now</span></div>
+    <button class="chat-close" id="chatClose" aria-label="Close chat">×</button>
+  </div>
+  <div class="chat-depts" id="chatDepts">
+    <button class="active" data-dept="Sales">Sales</button>
+    <button data-dept="Shipping Help">Shipping Help</button>
+    <button data-dept="Car Availability">Availability</button>
+  </div>
+  <div class="chat-context" id="chatContext" style="display:none;"></div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-input-row">
+    <input type="text" class="field" id="chatInput" placeholder="Type a message…" aria-label="Chat message">
+    <button class="btn btn-primary btn-sm" id="chatSend">Send</button>
+  </div>
+</div>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Image gallery">
+  <div class="lightbox-stage" id="lightboxStage">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close gallery">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">‹</button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">›</button>
+    <div class="lightbox-count" id="lightboxCount"></div>
+  </div>
+</div>
+
+<!-- compare bar + modal -->
+<div class="compare-bar" id="compareBar">
+  <span id="compareText">0 cars selected</span>
+  <button class="btn btn-secondary btn-sm" id="compareOpenBtn">Compare</button>
+  <button class="btn-ghost btn-sm" id="compareClearBtn">Clear</button>
+</div>
+<div class="modal-overlay" id="compareModal">
+  <div class="modal-box">
+    <div class="mh"><h3 class="h3">Compare cars</h3><button class="chat-close" id="compareModalClose">×</button></div>
+    <div id="compareTableWrap"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#/" class="logo"><span class="logo-mark">EV</span> ELOVAN</a>
+        <p class="lede" style="margin-top:14px;font-size:.88rem;">Verified cars sourced from Europe and North America, shipped to Nigeria with full transparency — from inspection to clearance.</p>
+        <div class="newsletter">
+          <input class="field" type="email" placeholder="Your email" aria-label="Newsletter email">
+          <button class="btn btn-secondary btn-sm" id="newsletterBtn">Join</button>
+        </div>
+      </div>
+      <div>
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#/cars">Browse inventory</a></li>
+          <li><a href="#/how-it-works">Sourcing &amp; verification</a></li>
+          <li><a href="#/shipping">Shipping &amp; clearance</a></li>
+          <li><a href="#/contact">Request a quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#/faq">FAQ</a></li>
+          <li><a href="#/contact">Contact us</a></li>
+          <li><a href="#" data-toast="Privacy policy — placeholder page">Privacy policy</a></li>
+          <li><a href="#" data-toast="Terms of service — placeholder page">Terms of service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Talk to us</h5>
+        <ul>
+          <li><a href="tel:+16132205445">Call: +1 613 220 5445</a></li>
+          <li><a href="#" id="footerWhatsapp">WhatsApp chat</a></li>
+          <li><a href="#/contact">Send a message</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ELOVAN Imports. Demo build — all listings are placeholders.</span>
+      <span>Lagos · Abuja · Port Harcourt — remote sourcing worldwide</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   DEMO DATA MODEL
+   ============================================================ */
+const ICONS = {
+  engine:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h3l2-3h6l2 3h3v7H4z"/><path d="M8 10V7M14 10V7M6 17v2M18 17v2"/></svg>',
+  mileage:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 13l3-3M12 5V3M4 13H2M22 13h-2M6 7L4.5 5.5M18 7l1.5-1.5"/></svg>',
+  transmission:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 8h6M9 12h6M9 16h2"/></svg>',
+  fuel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v14"/><path d="M4 11h10M16 8l3 3v6a1.5 1.5 0 0 0 3 0v-5l-3-4"/></path></svg>',
+  body:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l2-5a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 5v5H3z"/><circle cx="7.5" cy="18" r="1.5"/><circle cx="16.5" cy="18" r="1.5"/></svg>',
+  location:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>',
+  heart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+  empty:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>'
+};
+
+function carSVG(seed){
+  // simple silhouette, color varies by seed for variety
+  return `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 62 Q25 38 55 34 L80 20 Q100 14 122 20 L150 34 Q178 38 182 62 L182 66 L20 66 Z" fill="rgba(239,244,248,.14)" stroke="rgba(22,199,176,.55)" stroke-width="1.4"/>
+    <circle cx="55" cy="66" r="11" fill="rgba(10,14,19,.7)" stroke="rgba(201,169,97,.7)" stroke-width="2"/>
+    <circle cx="150" cy="66" r="11" fill="rgba(10,14,19,.7)" stroke="rgba(201,169,97,.7)" stroke-width="2"/>
+    <rect x="68" y="30" width="55" height="18" rx="3" fill="rgba(22,199,176,.12)" stroke="rgba(22,199,176,.4)" stroke-width="1"/>
+  </svg>`;
+}
+function plateStyle(i){
+  const palettes=[
+    'linear-gradient(160deg,#1A2530,#0D1319 60%,#101820)',
+    'linear-gradient(160deg,#1E2A22,#0D1319 60%,#101820)',
+    'linear-gradient(160deg,#241C14,#0D1319 60%,#101820)',
+    'linear-gradient(160deg,#1A1F30,#0D1319 60%,#101820)'
+  ];
+  return palettes[i % palettes.length];
+}
+
+const CARS = [
+  {id:'toyota-camry-xse-2021',make:'Toyota',model:'Camry XSE',year:2021,trim:'XSE V6',bodyType:'Sedan',fuelType:'Petrol',engine:'3.5L V6',transmission:'8-Speed Automatic',mileage:24500,color:'Midnight Black',location:'Toronto, CA',price:24800,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.5,
+    specs:{'Drive':'FWD','Doors':4,'Seats':5,'MPG (city/hwy)':'22/32'},
+    inspection:['150-point mechanical inspection passed','No accident history on record','Clean title verified'],
+    importNotes:['Left-hand drive, Nigeria-compliant','Under 8 years — meets import age rule'],
+    reviews:[{initials:'T.O.',rating:5,date:'Jul 2026',comment:'Exactly as described on the call. The team sent extra engine bay photos before I paid the deposit.',helpful:9},
+             {initials:'B.A.',rating:4,date:'Jun 2026',comment:'Smooth process, shipping took slightly longer than the estimate but support kept me updated.',helpful:5}]},
+  {id:'honda-crv-exl-2022',make:'Honda',model:'CR-V EX-L',year:2022,trim:'EX-L AWD',bodyType:'SUV',fuelType:'Petrol',engine:'1.5L Turbo I4',transmission:'CVT Automatic',mileage:18200,color:'Platinum White',location:'Columbus, US',price:27950,currency:'USD',availabilityStatus:'Available',reviewCount:3,rating:4.7,
+    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'27/32'},
+    inspection:['Full diagnostic scan — no fault codes','Brakes and tires above 80% life','Interior odor and stain check passed'],
+    importNotes:['Left-hand drive, Nigeria-compliant','Panoramic roof — confirm customs classification'],
+    reviews:[{initials:'K.N.',rating:5,date:'Aug 2026',comment:'Best CR-V price I found after comparing three other importers. Documentation was ready ahead of schedule.',helpful:12},
+             {initials:'F.E.',rating:5,date:'Jul 2026',comment:'Asked for extra undercarriage photos and got them within the hour. Very responsive team.',helpful:7},
+             {initials:'S.U.',rating:4,date:'May 2026',comment:'Good experience overall, would like more frequent shipping updates next time.',helpful:3}]},
+  {id:'nissan-altima-sl-2020',make:'Nissan',model:'Altima SL',year:2020,trim:'SL FWD',bodyType:'Sedan',fuelType:'Petrol',engine:'2.5L I4',transmission:'CVT Automatic',mileage:33100,color:'Gun Metallic',location:'Newark, US',price:16200,currency:'USD',availabilityStatus:'Reserved',reviewCount:2,rating:4.2,
+    specs:{'Drive':'FWD','Doors':4,'Seats':5,'MPG (city/hwy)':'28/39'},
+    inspection:['Compression test passed on all cylinders','Minor door-edge touch-up noted in report'],
+    importNotes:['Left-hand drive, Nigeria-compliant'],
+    reviews:[{initials:'D.I.',rating:4,date:'Jun 2026',comment:'Reserved this one quickly after the price alert. Waiting on an alternative in the meantime.',helpful:4},
+             {initials:'M.O.',rating:4,date:'Apr 2026',comment:'Inspection report was detailed and matched the car exactly on arrival.',helpful:6}]},
+  {id:'lexus-rx350-2022',make:'Lexus',model:'RX 350',year:2022,trim:'Premium',bodyType:'SUV',fuelType:'Petrol',engine:'3.5L V6',transmission:'8-Speed Automatic',mileage:15800,color:'Nightfall Mica',location:'Los Angeles, US',price:41500,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.8,
+    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'20/27'},
+    inspection:['Certified pre-owned checklist passed','Original factory paint confirmed via thickness gauge'],
+    importNotes:['Left-hand drive, Nigeria-compliant','High resale demand — verified market value attached'],
+    reviews:[{initials:'A.K.',rating:5,date:'Aug 2026',comment:'Paint thickness readings were shared unprompted — that level of detail sold me.',helpful:14},
+             {initials:'C.J.',rating:5,date:'Jul 2026',comment:'Premium car, premium process. Delivery arrived two days ahead of the estimate.',helpful:8}]},
+  {id:'bmw-330i-2021',make:'BMW',model:'3 Series 330i',year:2021,trim:'330i xDrive',bodyType:'Sedan',fuelType:'Petrol',engine:'2.0L Turbo I4',transmission:'8-Speed Automatic',mileage:21000,color:'Alpine White',location:'Chicago, US',price:29900,currency:'USD',availabilityStatus:'Sold',reviewCount:2,rating:4.6,
+    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'25/34'},
+    inspection:['Dealer service history attached','Turbo boost pressure tested normal'],
+    importNotes:['Left-hand drive, Nigeria-compliant'],
+    reviews:[{initials:'R.T.',rating:5,date:'May 2026',comment:'Already delivered and cleared customs — drives like new. Waitlist is worth it for the right car.',helpful:11},
+             {initials:'O.P.',rating:4,date:'Mar 2026',comment:'Great car, just wish more spec photos were up before I asked directly.',helpful:2}]},
+  {id:'mercedes-glc300-2022',make:'Mercedes-Benz',model:'GLC 300',year:2022,trim:'4MATIC',bodyType:'SUV',fuelType:'Petrol',engine:'2.0L Turbo I4',transmission:'9-Speed Automatic',mileage:12400,color:'Selenite Grey',location:'Boston, US',price:38700,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.6,
+    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'23/28'},
+    inspection:['Full detailing and mechanical check passed','Battery health at 96%'],
+    importNotes:['Left-hand drive, Nigeria-compliant','Low mileage — priority verification tier'],
+    reviews:[{initials:'N.C.',rating:5,date:'Jul 2026',comment:'Lower mileage than most listings I saw elsewhere at this price point.',helpful:6},
+             {initials:'I.B.',rating:4,date:'Jun 2026',comment:'Quote form prefilled with the car details, made asking questions fast.',helpful:3}]},
+  {id:'vw-tiguan-se-2021',make:'Volkswagen',model:'Tiguan SE',year:2021,trim:'SE 4Motion',bodyType:'Crossover',fuelType:'Petrol',engine:'2.0L Turbo I4',transmission:'8-Speed Automatic',mileage:27600,color:'Deep Black Pearl',location:'Atlanta, US',price:21300,currency:'USD',availabilityStatus:'Reserved',reviewCount:1,rating:4.3,
+    specs:{'Drive':'AWD','Doors':4,'Seats':7,'MPG (city/hwy)':'23/29'},
+    inspection:['Third-row seating mechanism tested','Timing chain service confirmed current'],
+    importNotes:['Left-hand drive, Nigeria-compliant'],
+    reviews:[{initials:'G.L.',rating:4,date:'May 2026',comment:'7-seater configuration was exactly what my family needed, currently on hold for us.',helpful:5}]},
+  {id:'ford-explorer-xlt-2020',make:'Ford',model:'Explorer XLT',year:2020,trim:'XLT 4WD',bodyType:'SUV',fuelType:'Petrol',engine:'2.3L EcoBoost I4',transmission:'10-Speed Automatic',mileage:38900,color:'Iconic Silver',location:'Detroit, US',price:19600,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.1,
+    specs:{'Drive':'4WD','Doors':4,'Seats':7,'MPG (city/hwy)':'21/28'},
+    inspection:['Frame and undercarriage rust check passed','Tow package verified functional'],
+    importNotes:['Left-hand drive, Nigeria-compliant'],
+    reviews:[{initials:'U.E.',rating:4,date:'Apr 2026',comment:'Higher mileage but priced fairly for it — inspection notes were upfront about wear.',helpful:4},
+             {initials:'J.M.',rating:4,date:'Feb 2026',comment:'Good family SUV, arrived clean and as photographed.',helpful:2}]},
+  {id:'audi-q5-premium-2022',make:'Audi',model:'Q5 Premium',year:2022,trim:'Premium Plus',bodyType:'SUV',fuelType:'Petrol',engine:'2.0L TFSI I4',transmission:'7-Speed S tronic',mileage:14100,color:'Glacier White',location:'Houston, US',price:36400,currency:'USD',availabilityStatus:'Sold',reviewCount:2,rating:4.7,
+    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'23/27'},
+    inspection:['Quattro drivetrain tested under load','Infotainment and sensors fully functional'],
+    importNotes:['Left-hand drive, Nigeria-compliant'],
+    reviews:[{initials:'P.A.',rating:5,date:'Jun 2026',comment:'Waitlisted for a similar Q5 now after seeing how this one turned out for a friend.',helpful:9},
+             {initials:'H.S.',rating:4,date:'Apr 2026',comment:'Clean transaction from quote to delivery confirmation.',helpful:3}]},
+  {id:'toyota-rav4-xle-2021',make:'Toyota',model:'RAV4 XLE',year:2021,trim:'XLE AWD',bodyType:'Crossover',fuelType:'Hybrid',engine:'2.5L Hybrid I4',transmission:'e-CVT',mileage:22300,color:'Ruby Flare Pearl',location:'Denver, US',price:26100,currency:'USD',availabilityStatus:'Available',reviewCount:3,rating:4.6,
+    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'41/38'},
+    inspection:['Hybrid battery health test passed','Regenerative braking system checked'],
+    importNotes:['Left-hand drive, Nigeria-compliant','Hybrid — confirm local service network before purchase'],
+    reviews:[{initials:'L.D.',rating:5,date:'Aug 2026',comment:'Fuel economy numbers matched what the team quoted almost exactly.',helpful:10},
+             {initials:'V.K.',rating:4,date:'Jul 2026',comment:'Asked about hybrid battery warranty and got a clear written answer same day.',helpful:5},
+             {initials:'Y.A.',rating:5,date:'May 2026',comment:'Great condition for the mileage, very happy with this purchase.',helpful:6}]},
+  {id:'honda-accord-sport-2020',make:'Honda',model:'Accord Sport',year:2020,trim:'Sport 2.0T',bodyType:'Sedan',fuelType:'Petrol',engine:'2.0L Turbo I4',transmission:'10-Speed Automatic',mileage:29700,color:'Crystal Black Pearl',location:'Charlotte, US',price:20400,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.4,
+    specs:{'Drive':'FWD','Doors':4,'Seats':5,'MPG (city/hwy)':'22/32'},
+    inspection:['Turbo and cooling system pressure tested','Suspension bushings checked'],
+    importNotes:['Left-hand drive, Nigeria-compliant'],
+    reviews:[{initials:'Z.O.',rating:5,date:'Jun 2026',comment:'Sport trim drives great, exactly matched the spec sheet on the listing.',helpful:7},
+             {initials:'E.N.',rating:4,date:'Mar 2026',comment:'Good value pick, minor delay in paperwork but resolved quickly.',helpful:3}]},
+  {id:'vw-golf-gti-2020',make:'Volkswagen',model:'Golf GTI',year:2020,trim:'SE',bodyType:'Hatchback',fuelType:'Petrol',engine:'2.0L Turbo I4',transmission:'7-Speed DSG',mileage:26800,color:'Tornado Red',location:'Portland, US',price:18900,currency:'USD',availabilityStatus:'Reserved',reviewCount:2,rating:4.5,
+    specs:{'Drive':'FWD','Doors':4,'Seats':5,'MPG (city/hwy)':'24/32'},
+    inspection:['Clutch and DSG service history verified','Performance brakes checked at 85% life'],
+    importNotes:['Left-hand drive, Nigeria-compliant','Enthusiast trim — high demand, limited availability'],
+    reviews:[{initials:'W.T.',rating:5,date:'Jul 2026',comment:'Reserved within a day of listing — GTIs move fast on this site.',helpful:8},
+             {initials:'Q.R.',rating:4,date:'May 2026',comment:'Great condition, hoping the next one comes with the same DSG service history.',helpful:4}]}
+];
+
+const state = {
+  route:'/',
+  params:{},
+  filters:{q:'',make:'',bodyType:'',fuel:'',transmission:'',yearMin:'',yearMax:'',priceMin:'',priceMax:'',mileageMax:'',availability:''},
+  sort:'newest',
+  view:'grid',
+  wishlist:new Set(),
+  compare:new Set(),
+  loading:false,
+  chatDept:'Sales',
+  chatCarContext:null,
+  chatHistory:[]
+};
+
+/* ---------- helpers ---------- */
+function money(n){return '$'+n.toLocaleString('en-US');}
+function statusBadge(s){
+  const cls = s==='Available'?'badge-available':s==='Reserved'?'badge-reserved':'badge-sold';
+  return `<span class="badge ${cls}">${s}</span>`;
+}
+function ctaForStatus(car){
+  if(car.availabilityStatus==='Available') return `<button class="btn btn-primary btn-sm btn-block" onclick="openLeadFor('${car.id}')">Request this car</button>`;
+  if(car.availabilityStatus==='Reserved') return `<button class="btn btn-secondary btn-sm btn-block" onclick="openLeadFor('${car.id}','alt')">Ask for alternatives</button>`;
+  return `<button class="btn btn-secondary btn-sm btn-block" onclick="openLeadFor('${car.id}','waitlist')">Join waitlist</button>`;
+}
+function starRow(r){
+  const full=Math.round(r);
+  let s='';
+  for(let i=0;i<5;i++) s += i<full ? '★' : '☆';
+  return `<span class="stars">${s} <span style="color:var(--text-faint)">${r.toFixed(1)}</span></span>`;
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(window.__toastT);
+  window.__toastT=setTimeout(()=>t.classList.remove('show'),3200);
+}
+function navigate(hash){ location.hash = hash; }
+
+/* ============================================================
+   CAR CARD COMPONENT
+   ============================================================ */
+function carCardHTML(car, idx){
+  const fav = state.wishlist.has(car.id) ? 'active' : '';
+  const cmp = state.compare.has(car.id) ? 'checked' : '';
+  return `
+  <article class="car-card">
+    <a href="#/cars/${car.id}" class="car-media hud-frame" aria-label="View ${car.year} ${car.make} ${car.model}">
+      <span class="hud-c1"></span><span class="hud-c2"></span><span class="hud-scan"></span>
+      <div class="plate" style="background:${plateStyle(idx)}"></div>
+      ${carSVG()}
+      <div class="car-badges">${statusBadge(car.availabilityStatus)}</div>
+    </a>
+    <button class="fav-btn ${fav}" aria-label="Save to wishlist" onclick="toggleWishlist(event,'${car.id}')">${ICONS.heart}</button>
+    <div class="car-body">
+      <div>
+        <div class="car-title">${car.year} ${car.make} ${car.model}</div>
+        <div class="car-sub">${car.trim} · ${car.location}</div>
+      </div>
+      ${starRow(car.rating)} <span style="font-size:.72rem;color:var(--text-faint)">(${car.reviewCount} reviews)</span>
+      <div class="chip-row">
+        <span class="spec-chip">${ICONS.mileage}${car.mileage.toLocaleString()} mi</span>
+        <span class="spec-chip">${ICONS.transmission}${car.transmission.split(' ')[0]}</span>
+        <span class="spec-chip">${ICONS.fuel}${car.fuelType}</span>
+      </div>
+      <div class="car-foot">
+        <div class="car-price">${money(car.price)}<small>landed cost varies by state</small></div>
+      </div>
+      <div>${ctaForStatus(car)}</div>
+      <label class="compare-check">
+        <input type="checkbox" ${cmp} onchange="toggleCompare('${car.id}')"> Add to compare
+      </label>
+    </div>
+  </article>`;
+}
+
+function skeletonCards(n){
+  return Array.from({length:n}).map(()=>`<div class="skeleton skel-card"></div>`).join('');
+}
+
+/* ---------- wishlist / compare ---------- */
+function toggleWishlist(e,id){
+  e.preventDefault();e.stopPropagation();
+  if(state.wishlist.has(id)){state.wishlist.delete(id);showToast('Removed from wishlist');}
+  else{state.wishlist.add(id);showToast('Saved to wishlist');}
+  render();
+}
+function toggleCompare(id){
+  if(state.compare.has(id)) state.compare.delete(id);
+  else{
+    if(state.compare.size>=3){showToast('You can compare up to 3 cars');return;}
+    state.compare.add(id);
+  }
+  updateCompareBar();
+}
+function updateCompareBar(){
+  const bar=document.getElementById('compareBar');
+  const n=state.compare.size;
+  document.getElementById('compareText').textContent = n+' car'+(n===1?'':'s')+' selected';
+  bar.classList.toggle('show', n>0);
+}
+function renderCompareModal(){
+  const cars=[...state.compare].map(id=>CARS.find(c=>c.id===id));
+  const rows = ['Price','Year','Body Type','Mileage','Transmission','Fuel Type','Location','Availability'];
+  let html = '<table class="compare-table"><tr><th>Spec</th>'+cars.map(c=>`<th>${c.make} ${c.model}</th>`).join('')+'</tr>';
+  const getVal=(c,r)=>({
+    'Price':money(c.price),'Year':c.year,'Body Type':c.bodyType,'Mileage':c.mileage.toLocaleString()+' mi',
+    'Transmission':c.transmission,'Fuel Type':c.fuelType,'Location':c.location,'Availability':c.availabilityStatus
+  }[r]);
+  rows.forEach(r=>{ html += `<tr><td>${r}</td>${cars.map(c=>`<td>${getVal(c,r)}</td>`).join('')}</tr>`; });
+  html += '</table>';
+  document.getElementById('compareTableWrap').innerHTML = cars.length ? html : '<p class="lede">Select up to 3 cars to compare.</p>';
+}
+document.getElementById('compareOpenBtn').addEventListener('click',()=>{renderCompareModal();document.getElementById('compareModal').classList.add('open');});
+document.getElementById('compareModalClose').addEventListener('click',()=>document.getElementById('compareModal').classList.remove('open'));
+document.getElementById('compareModal').addEventListener('click',e=>{if(e.target.id==='compareModal')e.target.classList.remove('open');});
+document.getElementById('compareClearBtn').addEventListener('click',()=>{state.compare.clear();updateCompareBar();render();});
+
+/* ============================================================
+   PAGE: HOME
+   ============================================================ */
+function pageHome(){
+  const featured = CARS.filter(c=>c.availabilityStatus==='Available').slice(0,3);
+  return `
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge">${ICONS.check} 500+ vehicles verified &amp; shipped</div>
+        <h1 class="h1">Import your next car <span class="accent">with total clarity.</span></h1>
+        <p class="lede">ELOVAN sources, inspects and ships cars from Europe and North America straight to Nigeria — with transparent pricing, real inspection reports, and a team you can actually reach.</p>
+        <div class="hero-ctas">
+          <a href="#/cars" class="btn btn-primary">Browse Cars</a>
+          <a href="#/contact" class="btn btn-secondary">Get a Quote</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>12–16</b><span>WKS AVG. DELIVERY</span></div>
+          <div class="hero-stat"><b>4.6★</b><span>AVG. CAR RATING</span></div>
+          <div class="hero-stat"><b>${CARS.length*40}+</b><span>UNITS SOURCED YTD</span></div>
+        </div>
+      </div>
+      <div class="hero-visual hud-frame hud-active">
+        <span class="hud-c1"></span><span class="hud-c2"></span><span class="hud-scan"></span>
+        <div class="plate"></div><div class="glow"></div>
+        <div class="carsvg">${carSVG()}</div>
+        <div class="hud-readout"><span>STATUS · VERIFIED</span><span>ORIGIN · EU / NA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;">
+      <div><div class="eyebrow">Available now</div><h2 class="h2">Featured inventory</h2></div>
+      <a href="#/cars" class="btn btn-ghost">View all inventory →</a>
+    </div>
+    <div class="grid-cars">${featured.map((c,i)=>carCardHTML(c,i)).join('')}</div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head"><div class="eyebrow">Process</div><h2 class="h2">How it works</h2><p class="lede" style="margin-top:8px;">From your first message to keys in hand — four checkpoints, no surprises.</p></div>
+    <div class="stepper">
+      <div class="step"><div class="num">01 · SOURCE</div><h4>We source &amp; verify</h4><p>Our team locates matching vehicles across trusted auctions and dealers in Europe and North America.</p></div>
+      <div class="step"><div class="num">02 · INSPECT</div><h4>Independent inspection</h4><p>Every car passes a documented mechanical and cosmetic inspection before it's listed for you.</p></div>
+      <div class="step"><div class="num">03 · PURCHASE</div><h4>You confirm &amp; pay</h4><p>Clear pricing breakdown, secure payment steps, and a dedicated contact for your order.</p></div>
+      <div class="step"><div class="num">04 · DELIVER</div><h4>Ship, clear &amp; deliver</h4><p>We handle ocean freight, documentation and customs clearance, then hand off to you locally.</p></div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="glass" style="padding:var(--sp-4);display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);align-items:center;">
+      <div>
+        <div class="eyebrow">Shipping, in plain terms</div>
+        <h2 class="h2" style="margin-top:8px;">No guessing on cost or timing</h2>
+        <p class="lede" style="margin-top:10px;">We publish estimated ranges up front and explain exactly what changes them — port, vehicle size, and season.</p>
+        <a href="#/shipping" class="btn btn-secondary" style="margin-top:var(--sp-2);">See shipping details</a>
+      </div>
+      <div class="factor-list">
+        <li><span>RoRo shipping, sedan/crossover</span><b>$1,300–$1,900</b></li>
+        <li><span>Container shipping, SUV</span><b>$2,400–$3,200</b></li>
+        <li><span>Customs &amp; clearance (est.)</span><b>Duty-dependent</b></li>
+        <li><span>Port to city delivery</span><b>$150–$400</b></li>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head"><div class="eyebrow">Buyers like you</div><h2 class="h2">What people are saying</h2></div>
+    <div class="testi-row">
+      <div class="testi-card">${starRow(5)}<p>"I compared four importers before choosing ELOVAN — the inspection report on my RAV4 was the most detailed by far."</p><div class="testi-who"><div class="testi-avatar">LD</div><div><b>L. Dauda</b><span>Lagos, Nigeria</span></div></div></div>
+      <div class="testi-card">${starRow(5)}<p>"The chat widget tagged my car automatically when I asked a question — got a real answer within minutes."</p><div class="testi-who"><div class="testi-avatar">KN</div><div><b>K. Nwosu</b><span>Abuja, Nigeria</span></div></div></div>
+      <div class="testi-card">${starRow(4)}<p>"Shipping took a little longer than the low end of the estimate, but they explained why and kept me posted the whole way."</p><div class="testi-who"><div class="testi-avatar">BA</div><div><b>B. Afolabi</b><span>Port Harcourt, Nigeria</span></div></div></div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head"><div class="eyebrow">Quick answers</div><h2 class="h2">Frequently asked</h2></div>
+    ${faqAccordionHTML(FAQS.slice(0,3))}
+    <a href="#/faq" class="btn btn-ghost" style="margin-top:var(--sp-2);">See all FAQs →</a>
+  </section>
+
+  <section class="section container">
+    ${leadBlockHTML('home')}
+  </section>
+  `;
+}
+
+/* ============================================================
+   PAGE: CARS (inventory)
+   ============================================================ */
+function matchesFilters(c){
+  const f = state.filters;
+  if(f.q && !(`${c.make} ${c.model} ${c.trim}`.toLowerCase().includes(f.q.toLowerCase()))) return false;
+  if(f.make && c.make!==f.make) return false;
+  if(f.bodyType && c.bodyType!==f.bodyType) return false;
+  if(f.fuel && c.fuelType!==f.fuel) return false;
+  if(f.transmission && !c.transmission.includes(f.transmission)) return false;
+  if(f.yearMin && c.year < +f.yearMin) return false;
+  if(f.yearMax && c.year > +f.yearMax) return false;
+  if(f.priceMin && c.price < +f.priceMin) return false;
+  if(f.priceMax && c.price > +f.priceMax) return false;
+  if(f.mileageMax && c.mileage > +f.mileageMax) return false;
+  if(f.availability && c.availabilityStatus!==f.availability) return false;
+  return true;
+}
+function sortCars(list){
+  const s=[...list];
+  switch(state.sort){
+    case 'price-asc': s.sort((a,b)=>a.price-b.price); break;
+    case 'price-desc': s.sort((a,b)=>b.price-a.price); break;
+    case 'mileage-asc': s.sort((a,b)=>a.mileage-b.mileage); break;
+    case 'mileage-desc': s.sort((a,b)=>b.mileage-a.mileage); break;
+    case 'reviewed': s.sort((a,b)=>b.reviewCount-a.reviewCount); break;
+    default: s.sort((a,b)=>b.year-a.year);
+  }
+  return s;
+}
+const MAKES=[...new Set(CARS.map(c=>c.make))].sort();
+const BODY_TYPES=[...new Set(CARS.map(c=>c.bodyType))].sort();
+const FUELS=[...new Set(CARS.map(c=>c.fuelType))].sort();
+
+function pageCars(){
+  return `
+  <section class="section container">
+    <div class="section-head"><div class="eyebrow">Inventory</div><h2 class="h2">Browse verified cars</h2><p class="lede" style="margin-top:6px;">Filters apply instantly — no page reloads.</p></div>
+    <div class="inv-layout">
+      <aside class="filters-panel" id="filtersPanel">
+        <h4>Search</h4>
+        <div class="filter-group"><input class="field" id="fq" placeholder="Search make, model, trim…" value="${state.filters.q}"></div>
+        <h4>Make</h4>
+        <div class="filter-group"><select class="field" id="fMake"><option value="">All makes</option>${MAKES.map(m=>`<option ${state.filters.make===m?'selected':''}>${m}</option>`).join('')}</select></div>
+        <h4>Body type</h4>
+        <div class="filter-group chip-toggle-row" id="fBody">${BODY_TYPES.map(b=>`<button class="chip-toggle ${state.filters.bodyType===b?'active':''}" data-val="${b}">${b}</button>`).join('')}</div>
+        <h4>Fuel type</h4>
+        <div class="filter-group chip-toggle-row" id="fFuel">${FUELS.map(f=>`<button class="chip-toggle ${state.filters.fuel===f?'active':''}" data-val="${f}">${f}</button>`).join('')}</div>
+        <h4>Transmission</h4>
+        <div class="filter-group"><select class="field" id="fTrans"><option value="">Any</option><option ${state.filters.transmission==='Automatic'?'selected':''}>Automatic</option><option ${state.filters.transmission==='CVT'?'selected':''}>CVT</option><option ${state.filters.transmission==='DSG'?'selected':''}>DSG</option></select></div>
+        <h4>Year range</h4>
+        <div class="filter-group filter-row"><input class="field" id="fYearMin" placeholder="From" value="${state.filters.yearMin}"><input class="field" id="fYearMax" placeholder="To" value="${state.filters.yearMax}"></div>
+        <h4>Price range (USD)</h4>
+        <div class="filter-group filter-row"><input class="field" id="fPriceMin" placeholder="Min" value="${state.filters.priceMin}"><input class="field" id="fPriceMax" placeholder="Max" value="${state.filters.priceMax}"></div>
+        <h4>Max mileage</h4>
+        <div class="filter-group"><input class="field" id="fMileage" placeholder="e.g. 30000" value="${state.filters.mileageMax}"></div>
+        <h4>Availability</h4>
+        <div class="filter-group chip-toggle-row" id="fAvail">
+          <button class="chip-toggle ${state.filters.availability==='Available'?'active':''}" data-val="Available">Available</button>
+          <button class="chip-toggle ${state.filters.availability==='Reserved'?'active':''}" data-val="Reserved">Reserved</button>
+          <button class="chip-toggle ${state.filters.availability==='Sold'?'active':''}" data-val="Sold">Sold</button>
+        </div>
+        <button class="btn btn-ghost clear-btn" id="fClear">Clear all filters</button>
+      </aside>
+      <div>
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <button class="btn btn-secondary btn-sm mobile-filter-btn" id="toggleFilters">Filters</button>
+            <span class="results-count" id="resultsCount"></span>
+          </div>
+          <div class="toolbar-right">
+            <select class="field" id="sortSelect" style="width:auto;">
+              <option value="newest" ${state.sort==='newest'?'selected':''}>Newest</option>
+              <option value="price-asc" ${state.sort==='price-asc'?'selected':''}>Price: Low to High</option>
+              <option value="price-desc" ${state.sort==='price-desc'?'selected':''}>Price: High to Low</option>
+              <option value="mileage-asc" ${state.sort==='mileage-asc'?'selected':''}>Mileage: Low to High</option>
+              <option value="mileage-desc" ${state.sort==='mileage-desc'?'selected':''}>Mileage: High to Low</option>
+              <option value="reviewed" ${state.sort==='reviewed'?'selected':''}>Most reviewed</option>
+            </select>
+            <div class="view-toggle">
+              <button id="viewGrid" class="${state.view==='grid'?'active':''}" aria-label="Grid view">▦</button>
+              <button id="viewList" class="${state.view==='list'?'active':''}" aria-label="List view">☰</button>
+            </div>
+          </div>
+        </div>
+        <div class="grid-cars ${state.view==='list'?'list-view':''}" id="carsGrid"></div>
+      </div>
+    </div>
+  </section>`;
+}
+function renderCarsGrid(){
+  const grid=document.getElementById('carsGrid');
+  if(!grid) return;
+  if(state.loading){
+    grid.innerHTML = skeletonCards(6);
+    document.getElementById('resultsCount').textContent='Loading…';
+    return;
+  }
+  const results = sortCars(CARS.filter(matchesFilters));
+  document.getElementById('resultsCount').textContent = `${results.length} car${results.length===1?'':'s'} found`;
+  if(!results.length){
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${ICONS.empty}<h4>No cars match those filters</h4><p>Try widening your price or year range, or clear filters to see the full inventory.</p><button class="btn btn-secondary btn-sm" onclick="clearFilters()">Clear all filters</button></div>`;
+    return;
+  }
+  grid.innerHTML = results.map((c,i)=>carCardHTML(c,i)).join('');
+}
+function clearFilters(){
+  state.filters={q:'',make:'',bodyType:'',fuel:'',transmission:'',yearMin:'',yearMax:'',priceMin:'',priceMax:'',mileageMax:'',availability:''};
+  render();
+}
+function wireCarsPage(){
+  const grid=document.getElementById('carsGrid');
+  if(!grid) return;
+  simulateLoad(()=>renderCarsGrid());
+
+  const bind=(id,key,evt='input')=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.addEventListener(evt,()=>{state.filters[key]=el.value;simulateLoad(renderCarsGrid);});
+  };
+  bind('fq','q'); bind('fMake','make','change'); bind('fTrans','transmission','change');
+  bind('fYearMin','yearMin'); bind('fYearMax','yearMax');
+  bind('fPriceMin','priceMin'); bind('fPriceMax','priceMax'); bind('fMileage','mileageMax');
+
+  document.querySelectorAll('#fBody .chip-toggle').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      state.filters.bodyType = state.filters.bodyType===btn.dataset.val ? '' : btn.dataset.val;
+      simulateLoad(()=>{renderCarsGrid();document.querySelectorAll('#fBody .chip-toggle').forEach(b=>b.classList.toggle('active',b.dataset.val===state.filters.bodyType));});
+    });
+  });
+  document.querySelectorAll('#fFuel .chip-toggle').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      state.filters.fuel = state.filters.fuel===btn.dataset.val ? '' : btn.dataset.val;
+      simulateLoad(()=>{renderCarsGrid();document.querySelectorAll('#fFuel .chip-toggle').forEach(b=>b.classList.toggle('active',b.dataset.val===state.filters.fuel));});
+    });
+  });
+  document.querySelectorAll('#fAvail .chip-toggle').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      state.filters.availability = state.filters.availability===btn.dataset.val ? '' : btn.dataset.val;
+      simulateLoad(()=>{renderCarsGrid();document.querySelectorAll('#fAvail .chip-toggle').forEach(b=>b.classList.toggle('active',b.dataset.val===state.filters.availability));});
+    });
+  });
+  document.getElementById('fClear').addEventListener('click',clearFilters);
+  document.getElementById('sortSelect').addEventListener('change',e=>{state.sort=e.target.value;renderCarsGrid();});
+  document.getElementById('viewGrid').addEventListener('click',()=>{state.view='grid';render();});
+  document.getElementById('viewList').addEventListener('click',()=>{state.view='list';render();});
+  const toggleBtn=document.getElementById('toggleFilters');
+  if(toggleBtn) toggleBtn.addEventListener('click',()=>document.getElementById('filtersPanel').classList.toggle('open'));
+}
+function simulateLoad(cb){
+  state.loading=true; renderCarsGrid();
+  setTimeout(()=>{state.loading=false; cb();},320);
+}
+
+/* ============================================================
+   PAGE: CAR DETAIL
+   ============================================================ */
+function pageCarDetail(id){
+  const car = CARS.find(c=>c.id===id);
+  if(!car) return `<div class="section container"><div class="empty-state">${ICONS.empty}<h4>Car not found</h4><p>This listing may have been removed.</p><a class="btn btn-secondary btn-sm" href="#/cars">Back to inventory</a></div></div>`;
+  const gallery = Array.from({length:5});
+  const idx = CARS.indexOf(car);
+  return `
+  <section class="section container">
+    <a href="#/cars" class="btn-ghost" style="display:inline-flex;margin-bottom:var(--sp-2);">← Back to inventory</a>
+    <div class="detail-grid">
+      <div>
+        <div class="gallery-main hud-frame hud-active" id="galleryMain" onclick="openLightbox(0)">
+          <span class="hud-c1"></span><span class="hud-c2"></span><span class="hud-scan"></span>
+          <div class="plate" style="background:${plateStyle(idx)}"></div>
+          ${carSVG()}
+          <div class="car-badges">${statusBadge(car.availabilityStatus)}</div>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs">
+          ${gallery.map((_,i)=>`<button class="thumb ${i===0?'active':''}" data-i="${i}" onclick="setThumb(${i})" aria-label="View photo ${i+1}"><div class="plate" style="background:${plateStyle(idx+i)}"></div>${carSVG()}</button>`).join('')}
+        </div>
+
+        <div class="spec-grid">
+          <div class="spec-tile">${ICONS.engine}<b>${car.engine}</b><span>Engine</span></div>
+          <div class="spec-tile">${ICONS.mileage}<b>${car.mileage.toLocaleString()} mi</b><span>Mileage</span></div>
+          <div class="spec-tile">${ICONS.transmission}<b>${car.transmission}</b><span>Transmission</span></div>
+          <div class="spec-tile">${ICONS.fuel}<b>${car.fuelType}</b><span>Fuel type</span></div>
+          <div class="spec-tile">${ICONS.body}<b>${car.bodyType}</b><span>Body type</span></div>
+          <div class="spec-tile">${ICONS.location}<b>${car.location}</b><span>Current location</span></div>
+        </div>
+
+        <div class="notes-block">
+          <h4>Inspection notes</h4>
+          <ul>${car.inspection.map(n=>`<li>${n}</li>`).join('')}</ul>
+        </div>
+        <div class="notes-block">
+          <h4>Import notes for Nigeria</h4>
+          <ul>${car.importNotes.map(n=>`<li>${n}</li>`).join('')}</ul>
+        </div>
+
+        <div class="section" style="padding-top:var(--sp-4);padding-bottom:0;">
+          <div class="section-head"><div class="eyebrow">Reviews for this exact car</div><h3 class="h3">What buyers say</h3></div>
+          <div class="review-summary">
+            <div class="score">${car.rating.toFixed(1)}</div>
+            <div>${starRow(car.rating)}<div style="font-size:.78rem;color:var(--text-faint);margin-top:4px;">${car.reviewCount} review${car.reviewCount===1?'':'s'}</div></div>
+          </div>
+          <div id="reviewsList">${car.reviews.map((r,i)=>reviewCardHTML(r,i)).join('')}</div>
+          <div class="side-card" style="margin-top:var(--sp-3);">
+            <h4>Leave a review</h4>
+            <form id="reviewForm">
+              <div class="form-grid">
+                <div class="field-wrap"><label for="revName">Your name / initials</label><input class="field" id="revName" required></div>
+                <div class="field-wrap"><label for="revRating">Rating</label>
+                  <select class="field" id="revRating"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>
+                </div>
+                <div class="field-wrap span-2"><label for="revComment">Comment</label><textarea class="field" id="revComment" rows="3" required placeholder="Share your experience with this specific car…"></textarea></div>
+              </div>
+              <button class="btn btn-secondary btn-sm" style="margin-top:10px;" type="submit">Submit review</button>
+              <p style="font-size:.72rem;color:var(--text-faint);margin-top:8px;">Reviews are moderated before publishing.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="detail-head">
+          <div>
+            <div class="car-sub" style="margin-bottom:4px;">${car.make} · ${car.bodyType}</div>
+            <h1 class="h3" style="font-size:1.5rem;">${car.year} ${car.make} ${car.model}</h1>
+            <div class="car-sub">${car.trim} · ${car.color}</div>
+          </div>
+          <div class="price-block"><div class="amt">${money(car.price)}</div><small>landed cost varies by state</small></div>
+        </div>
+
+        <div class="avail-module">
+          <div class="status-row">${statusBadge(car.availabilityStatus)} <span style="font-size:.82rem;color:var(--text-muted);">${car.availabilityStatus==='Available'?'Ready to request now':car.availabilityStatus==='Reserved'?'Currently on hold for another buyer':'No longer available'}</span></div>
+          <p class="hint">${car.availabilityStatus==='Available'?'Submit a request and our team confirms details within one business day.':car.availabilityStatus==='Reserved'?'We can show you similar verified vehicles right away.':'Join the waitlist to be notified when a similar unit is sourced.'}</p>
+          ${ctaForStatus(car)}
+          <button class="btn btn-secondary btn-block" style="margin-top:8px;" onclick="openChatWithCar('${car.id}')">${'Ask about this exact car (chat)'}</button>
+          <a class="btn btn-ghost btn-block" style="margin-top:4px;" href="tel:+16132205445">Call: +1 613 220 5445</a>
+        </div>
+
+        <div class="side-card" style="margin-top:var(--sp-3);">
+          <h4>Ask about this exact car</h4>
+          ${leadFormHTML(car.id,'detail')}
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+function reviewCardHTML(r,i){
+  return `<div class="review-card">
+    <div class="rh"><span class="who">${r.initials}</span><span class="when">${r.date}</span></div>
+    ${starRow(r.rating)}
+    <p style="margin-top:6px;">${r.comment}</p>
+    <div class="helpful-row">
+      <button onclick="markHelpful(this)">👍 Helpful (${r.helpful})</button>
+    </div>
+  </div>`;
+}
+function markHelpful(btn){
+  const n = parseInt(btn.textContent.match(/\((\d+)\)/)[1],10);
+  btn.textContent = `👍 Helpful (${n+1})`;
+  btn.disabled=true;
+}
+function setThumb(i){
+  document.querySelectorAll('#galleryThumbs .thumb').forEach((t,idx)=>t.classList.toggle('active',idx===i));
+}
+
+/* ---------- lightbox ---------- */
+let lightboxIndex=0, lightboxTotal=5;
+function openLightbox(i){
+  lightboxIndex=i;
+  document.getElementById('lightbox').classList.add('open');
+  renderLightbox();
+}
+function renderLightbox(){
+  const stage=document.getElementById('lightboxStage');
+  const existing = stage.querySelector('.plate,svg');
+  stage.querySelectorAll('.plate,svg').forEach(e=>e.remove());
+  const plate=document.createElement('div'); plate.className='plate'; plate.style.background=plateStyle(lightboxIndex);
+  stage.prepend(plate);
+  stage.insertAdjacentHTML('beforeend',carSVG());
+  document.getElementById('lightboxCount').textContent = `${lightboxIndex+1} / ${lightboxTotal}`;
+}
+document.getElementById('lightboxClose').addEventListener('click',()=>document.getElementById('lightbox').classList.remove('open'));
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')e.target.classList.remove('open');});
+document.getElementById('lightboxPrev').addEventListener('click',()=>{lightboxIndex=(lightboxIndex-1+lightboxTotal)%lightboxTotal;renderLightbox();});
+document.getElementById('lightboxNext').addEventListener('click',()=>{lightboxIndex=(lightboxIndex+1)%lightboxTotal;renderLightbox();});
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key==='Escape') document.getElementById('lightbox').classList.remove('open');
+  if(e.key==='ArrowLeft') document.getElementById('lightboxPrev').click();
+  if(e.key==='ArrowRight') document.getElementById('lightboxNext').click();
+});
+
+/* ============================================================
+   PAGE: HOW IT WORKS
+   ============================================================ */
+function pageHowItWorks(){
+  return `
+  <section class="section container">
+    <div class="section-head"><div class="eyebrow">Process</div><h2 class="h2">How ELOVAN works, step by step</h2><p class="lede" style="margin-top:8px;">Click through the timeline to see what happens — and roughly how long it takes — at each stage.</p></div>
+    <div class="timeline-widget">
+      <div class="timeline-tabs" id="howTabs">
+        ${HOW_STEPS.map((s,i)=>`<button class="${i===0?'active':''}" data-i="${i}">${s.label}</button>`).join('')}
+      </div>
+      <div class="timeline-panel" id="howPanel"></div>
+    </div>
+
+    <div class="section-head" style="margin-top:var(--sp-6);"><div class="eyebrow">Before you commit</div><h2 class="h2">Buyer guidance checklist</h2></div>
+    <div class="checklist-grid">
+      ${BUYER_CHECKLIST.map(c=>`<div class="check-item">${ICONS.check}<span>${c}</span></div>`).join('')}
+    </div>
+  </section>`;
+}
+const HOW_STEPS=[
+  {label:'1 · Enquiry',title:'You tell us what you need',time:'Day 0',body:'Send your budget, preferred make/model, and timeline through the quote form or chat. A specialist reviews it the same day.'},
+  {label:'2 · Sourcing',title:'We source matching vehicles',time:'Days 1–5',body:'Our sourcing team pulls options from vetted auctions and dealer networks in Europe and North America and sends you a shortlist.'},
+  {label:'3 · Verification',title:'Independent inspection',time:'Days 3–7',body:'Every shortlisted car gets a documented mechanical, cosmetic and history check before you\u2019re asked to commit.'},
+  {label:'4 · Purchase',title:'You confirm and pay',time:'Day 7–10',body:'Once you approve a car, we issue a clear cost breakdown and secure payment instructions, then lock in the purchase.'},
+  {label:'5 · Shipping',title:'Ocean freight to Nigeria',time:'Weeks 2–10',body:'Vehicles ship via RoRo or container depending on size and route, with tracking updates sent to you regularly.'},
+  {label:'6 · Delivery',title:'Clearance and handover',time:'Weeks 10–14',body:'We manage customs clearance at the port and coordinate final delivery or pickup with you.'}
+];
+function renderHowPanel(i){
+  const s=HOW_STEPS[i];
+  document.getElementById('howPanel').innerHTML = `<h4>${s.title}</h4><p><span class="mono" style="color:var(--gold);">${s.time}</span></p><p>${s.body}</p>`;
+}
+const BUYER_CHECKLIST=[
+  'Confirm the vehicle year meets Nigeria\u2019s import age requirements',
+  'Ask for the full inspection report before paying a deposit',
+  'Confirm total landed cost, not just the vehicle price',
+  'Check estimated shipping window for your chosen route',
+  'Ask which port your vehicle will clear through',
+  'Confirm your preferred contact channel for updates'
+];
+
+/* ============================================================
+   PAGE: SHIPPING
+   ============================================================ */
+function pageShipping(){
+  return `
+  <section class="section container">
+    <div class="section-head"><div class="eyebrow">Shipping &amp; import</div><h2 class="h2">Clear pricing, clear timelines</h2>
+      <p class="lede" style="margin-top:8px;">We know shipping is usually the most confusing part of importing a car. Here's what affects cost and timing, in plain terms.</p>
+    </div>
+    <div class="checklist-grid" style="grid-template-columns:repeat(2,1fr);">
+      <div class="side-card"><h4>Estimated cost ranges</h4>
+        <div class="factor-list">
+          <li><span>RoRo (sedan/crossover)</span><b>$1,300–$1,900</b></li>
+          <li><span>Container (SUV/large)</span><b>$2,400–$3,200</b></li>
+          <li><span>Customs duty &amp; levies</span><b>Varies by vehicle age/value</b></li>
+          <li><span>Port handling &amp; clearance</span><b>$300–$600</b></li>
+          <li><span>Local delivery from port</span><b>$150–$400</b></li>
+        </div>
+      </div>
+      <div class="side-card"><h4>What changes the estimate</h4>
+        <ul class="notes-block" style="border:none;padding:0;background:none;">
+          <li>Departure port and destination port (Lagos, Port Harcourt)</li>
+          <li>Vehicle size and shipping method (RoRo vs container)</li>
+          <li>Seasonal freight demand and vessel availability</li>
+          <li>Current customs duty rates and vehicle age</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:var(--sp-6);"><div class="eyebrow">After you submit a request</div><h2 class="h2">What happens next</h2></div>
+    <div class="stepper">
+      <div class="step"><div class="num">STEP 1</div><h4>Confirmation call</h4><p>A specialist confirms your car choice and reviews the full cost breakdown with you.</p></div>
+      <div class="step"><div class="num">STEP 2</div><h4>Booking &amp; documentation</h4><p>We book the shipping slot and prepare bill of lading and export paperwork.</p></div>
+      <div class="step"><div class="num">STEP 3</div><h4>In-transit updates</h4><p>You receive tracking milestones by your preferred contact channel — chat, call, or WhatsApp.</p></div>
+      <div class="step"><div class="num">STEP 4</div><h4>Arrival &amp; clearance</h4><p>We coordinate clearance at the destination port and confirm your delivery or pickup window.</p></div>
+    </div>
+
+    <div style="margin-top:var(--sp-5);">${leadBlockHTML('shipping')}</div>
+  </section>`;
+}
+
+/* ============================================================
+   PAGE: FAQ
+   ============================================================ */
+const FAQS=[
+  {q:'How long does shipping actually take?',a:'Most vehicles arrive in Nigeria within 12–16 weeks of purchase, depending on shipping method and port congestion. We give you a specific window once your car is booked.'},
+  {q:'What if the car doesn\u2019t match its inspection report?',a:'Every listing is backed by a documented inspection. If there\u2019s a discrepancy on arrival, contact our support team immediately with photos and your order reference — we investigate every case.'},
+  {q:'Can I request a car that isn\u2019t currently listed?',a:'Yes. Use the quote form to describe your preferred make, model, budget and timeline, and our sourcing team will search on your behalf.'},
+  {q:'What happens if my chosen car gets reserved by someone else?',a:'We\u2019ll notify you right away and show you closely matching alternatives, or add you to a waitlist for the same configuration.'},
+  {q:'Do you handle customs clearance for me?',a:'Yes, our team manages clearance paperwork and works directly with port agents. You\u2019ll get a delivery or pickup window once clearance completes.'},
+  {q:'How do I pay, and is it secure?',a:'Once you confirm a vehicle, we send a clear payment breakdown and secure instructions. We never ask for payment before a written cost confirmation.'},
+  {q:'Can I speak to someone instead of chatting?',a:'Absolutely — use the click-to-call button anywhere on the site, or request a callback through the quote form.'}
+];
+function faqAccordionHTML(list){
+  return list.map((f,i)=>`
+    <div class="accordion-item" data-i="${i}">
+      <button aria-expanded="false">${f.q}<span class="plus">+</span></button>
+      <div class="accordion-body"><p>${f.a}</p></div>
+    </div>`).join('');
+}
+function pageFAQ(){
+  return `
+  <section class="section container">
+    <div class="section-head"><div class="eyebrow">Support</div><h2 class="h2">Frequently asked questions</h2></div>
+    <div id="faqList">${faqAccordionHTML(FAQS)}</div>
+    <div style="margin-top:var(--sp-5);">${leadBlockHTML('faq')}</div>
+  </section>`;
+}
+function wireAccordion(){
+  document.querySelectorAll('.accordion-item button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const item=btn.closest('.accordion-item');
+      const open=item.classList.contains('open');
+      item.classList.toggle('open',!open);
+      btn.setAttribute('aria-expanded',String(!open));
+    });
+  });
+}
+
+/* ============================================================
+   PAGE: CONTACT
+   ============================================================ */
+function pageContact(){
+  return `
+  <section class="section container">
+    <div class="section-head"><div class="eyebrow">Contact</div><h2 class="h2">Talk to the ELOVAN team</h2><p class="lede" style="margin-top:8px;">Chat, call, or send a message — whichever works best for you.</p></div>
+    <div class="detail-grid">
+      <div class="side-card">
+        ${leadFormHTML('','contact')}
+      </div>
+      <div>
+        <div class="side-card">
+          <h4>Direct contact</h4>
+          <p class="lede" style="font-size:.88rem;margin-bottom:10px;">Our team responds fastest over chat during business hours (WAT).</p>
+          <a class="btn btn-primary btn-block" href="tel:+16132205445" style="margin-bottom:8px;">Call: +1 613 220 5445</a>
+          <button class="btn btn-secondary btn-block" onclick="document.getElementById('chatFab').click()">Start a live chat</button>
+        </div>
+        <div class="side-card">
+          <h4>Office &amp; sourcing hubs</h4>
+          <div class="factor-list">
+            <li><span>Nigeria coordination</span><b>Lagos</b></li>
+            <li><span>NA sourcing hub</span><b>Toronto / Detroit</b></li>
+            <li><span>EU sourcing hub</span><b>Remote network</b></li>
+          </div>
+        </div>
+        <div class="side-card" style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:.8rem;font-family:var(--font-mono);background:var(--bg-alt);">
+          MAP PLACEHOLDER
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ============================================================
+   LEAD FORM (reusable component: LeadFormWizard)
+   ============================================================ */
+function leadFormHTML(carId, ctx){
+  const uid = 'lead_'+ctx+'_'+(carId||'general');
+  return `
+  <form id="${uid}" class="lead-form" data-ctx="${ctx}" data-car="${carId}" novalidate>
+    <div class="progress-track"><div class="progress-fill" style="width:16%"></div></div>
+    <div class="form-grid">
+      <div class="field-wrap">
+        <label for="${uid}_name">Full name</label>
+        <input class="field" id="${uid}_name" required placeholder="e.g. Chidinma Okafor">
+        <span class="error-text">Please enter your name.</span>
+      </div>
+      <div class="field-wrap">
+        <label for="${uid}_phone">Phone / WhatsApp</label>
+        <input class="field" id="${uid}_phone" required placeholder="e.g. +234 801 234 5678">
+        <span class="error-text">Please enter a valid phone number.</span>
+      </div>
+      <div class="field-wrap">
+        <label for="${uid}_city">City / State</label>
+        <input class="field" id="${uid}_city" required placeholder="e.g. Lagos, LA">
+        <span class="error-text">Please enter your city and state.</span>
+      </div>
+      <div class="field-wrap">
+        <label for="${uid}_timeline">Preferred delivery timeline</label>
+        <select class="field" id="${uid}_timeline">
+          <option>As soon as possible</option>
+          <option>Within 1–2 months</option>
+          <option>Within 3–6 months</option>
+          <option>Just exploring options</option>
+        </select>
+      </div>
+      <div class="field-wrap">
+        <label for="${uid}_budget">Budget range (USD)</label>
+        <select class="field" id="${uid}_budget">
+          <option>Under $15,000</option>
+          <option>$15,000–$25,000</option>
+          <option>$25,000–$40,000</option>
+          <option>$40,000+</option>
+        </select>
+      </div>
+      <div class="field-wrap">
+        <label for="${uid}_car">Car of interest</label>
+        <select class="field" id="${uid}_car">
+          <option value="">Not sure yet</option>
+          ${CARS.map(c=>`<option value="${c.id}" ${c.id===carId?'selected':''}>${c.year} ${c.make} ${c.model}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field-wrap">
+        <label for="${uid}_channel">Preferred contact channel</label>
+        <select class="field" id="${uid}_channel"><option>Chat</option><option>Phone call</option><option>WhatsApp</option></select>
+      </div>
+      <div class="field-wrap span-2">
+        <label for="${uid}_msg">Message (optional)</label>
+        <textarea class="field" id="${uid}_msg" rows="3" placeholder="Anything else we should know?"></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block" style="margin-top:14px;">Submit request</button>
+  </form>
+  <div class="success-box" id="${uid}_success" style="display:none;">
+    <div class="check">${ICONS.check}</div>
+    <h4>Request received</h4>
+    <p class="lede" style="margin:8px auto 0;font-size:.88rem;">A specialist will reach out within one business day using your preferred contact channel. Next: we confirm availability and send full pricing.</p>
+  </div>`;
+}
+function leadBlockHTML(ctx){
+  return `
+  <div class="lead-block">
+    <div class="lead-inner">
+      <div>
+        <div class="eyebrow">Get a quote</div>
+        <h2 class="h2" style="margin-top:8px;">Tell us what you're looking for</h2>
+        <p class="lede" style="margin-top:10px;">Share your budget and timeline — our team responds with real options, not a form letter.</p>
+      </div>
+      <div>${leadFormHTML('',ctx)}</div>
+    </div>
+  </div>`;
+}
+function wireLeadForms(){
+  document.querySelectorAll('.lead-form').forEach(form=>{
+    const uid=form.id;
+    const nameEl=document.getElementById(uid+'_name');
+    const phoneEl=document.getElementById(uid+'_phone');
+    const cityEl=document.getElementById(uid+'_city');
+    const fields=[nameEl,phoneEl,cityEl];
+    const progress=form.querySelector('.progress-fill');
+    function updateProgress(){
+      let filled=0;
+      form.querySelectorAll('input,select,textarea').forEach(el=>{ if(el.value && el.value.trim() && !el.dataset.placeholder) filled++; });
+      const total=form.querySelectorAll('input,select,textarea').length;
+      progress.style.width = Math.max(16, Math.round((filled/total)*100))+'%';
+    }
+    form.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',updateProgress));
+    updateProgress();
+
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      let ok=true;
+      fields.forEach(el=>{
+        const wrap=el.closest('.field-wrap');
+        const err=wrap.querySelector('.error-text');
+        const valid = el.id.includes('phone') ? el.value.trim().length>=7 : el.value.trim().length>0;
+        el.classList.toggle('err',!valid);
+        if(err) err.classList.toggle('show',!valid);
+        if(!valid) ok=false;
+      });
+      if(!ok){ showToast('Please complete the required fields'); return; }
+      form.style.display='none';
+      document.getElementById(uid+'_success').style.display='block';
+      showToast('Quote request submitted');
+    });
+  });
+}
+function openLeadFor(carId, mode){
+  navigate('#/cars/'+carId);
+  setTimeout(()=>{
+    const el=document.querySelector(`select[id$="_car"]`);
+    document.querySelector('.side-card form')?.scrollIntoView({behavior:'smooth',block:'center'});
+    if(mode) showToast(mode==='alt' ? 'Showing similar available cars in your quote form' : 'You\u2019ll be notified when a similar car is available');
+  },80);
+}
+
+/* ============================================================
+   WEBCHAT WIDGET
+   ============================================================ */
+const chatFab=document.getElementById('chatFab');
+const chatPanel=document.getElementById('chatPanel');
+const chatBody=document.getElementById('chatBody');
+const chatContext=document.getElementById('chatContext');
+
+function botReply(text){
+  state.chatHistory.push({from:'bot',text});
+  chatBody.insertAdjacentHTML('beforeend',`<div class="msg bot">${text}</div>`);
+  chatBody.scrollTop=chatBody.scrollHeight;
+}
+function userMsg(text){
+  state.chatHistory.push({from:'user',text});
+  chatBody.insertAdjacentHTML('beforeend',`<div class="msg user">${text}</div>`);
+  chatBody.scrollTop=chatBody.scrollHeight;
+}
+function openChat(){
+  chatPanel.classList.add('open');
+  if(!chatBody.children.length){
+    botReply(`Hi! You're chatting with ELOVAN ${state.chatDept}. How can we help today?`);
+  }
+}
+function openChatWithCar(carId){
+  const car=CARS.find(c=>c.id===carId);
+  state.chatCarContext=car;
+  chatContext.style.display='block';
+  chatContext.textContent = `CONTEXT: ${car.year} ${car.make} ${car.model} · #${car.id}`;
+  openChat();
+  botReply(`I can see you're asking about the ${car.year} ${car.make} ${car.model}. It's currently ${car.availabilityStatus}. What would you like to know — pricing, inspection details, or shipping timeline?`);
+}
+chatFab.addEventListener('click',openChat);
+document.getElementById('mobileChatBtn').addEventListener('click',openChat);
+document.getElementById('chatClose').addEventListener('click',()=>chatPanel.classList.remove('open'));
+document.getElementById('footerWhatsapp').addEventListener('click',e=>{e.preventDefault();openChat();});
+document.querySelectorAll('#chatDepts button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#chatDepts button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    state.chatDept=btn.dataset.dept;
+    botReply(`You're now connected with ${btn.dataset.dept}. What can we help with?`);
+  });
+});
+function sendChat(){
+  const input=document.getElementById('chatInput');
+  const val=input.value.trim();
+  if(!val) return;
+  userMsg(val);
+  input.value='';
+  setTimeout(()=>{
+    // simple canned response demo — falls back to a message form if "unavailable" is simulated
+    botReply(`Thanks — a ${state.chatDept} specialist will follow up here shortly. In the meantime, you can also request a callback using the quote form.`);
+  },500);
+}
+document.getElementById('chatSend').addEventListener('click',sendChat);
+document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat();});
+
+/* ============================================================
+   NAV / MOBILE MENU / MISC WIRES
+   ============================================================ */
+document.getElementById('navToggle').addEventListener('click',()=>{
+  const menu=document.getElementById('mobileMenu');
+  const open=menu.classList.toggle('open');
+  document.getElementById('navToggle').setAttribute('aria-expanded',String(open));
+});
+document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open')));
+document.getElementById('newsletterBtn').addEventListener('click',()=>showToast('Subscribed — thanks for joining!'));
+document.querySelectorAll('[data-toast]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();showToast(el.dataset.toast);}));
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+function parseRoute(){
+  const hash = location.hash.replace(/^#/,'') || '/';
+  const carMatch = hash.match(/^\/cars\/([a-z0-9-]+)/i);
+  if(carMatch) return {route:'/cars/:id',params:{id:carMatch[1]}};
+  return {route: hash.split('?')[0] || '/', params:{}};
+}
+function render(){
+  const {route,params} = parseRoute();
+  state.route=route; state.params=params;
+  const app=document.getElementById('app');
+  let html='';
+  if(route==='/') html=pageHome();
+  else if(route==='/cars') html=pageCars();
+  else if(route==='/cars/:id') html=pageCarDetail(params.id);
+  else if(route==='/how-it-works') html=pageHowItWorks();
+  else if(route==='/shipping') html=pageShipping();
+  else if(route==='/faq') html=pageFAQ();
+  else if(route==='/contact') html=pageContact();
+  else html=`<div class="section container"><div class="empty-state">${ICONS.empty}<h4>Page not found</h4><a class="btn btn-secondary btn-sm" href="#/">Go home</a></div></div>`;
+  app.innerHTML = html;
+  window.scrollTo({top:0,behavior:'instant' in window ? 'instant' : 'auto'});
+
+  document.querySelectorAll('[data-route]').forEach(a=>{
+    a.classList.toggle('active', ('/'+ (a.dataset.route||'')).replace('//','/') === ('/'+route).replace('//','/') || (a.dataset.route===route));
+  });
+
+  if(route==='/cars') wireCarsPage();
+  if(route==='/how-it-works'){
+    renderHowPanel(0);
+    document.querySelectorAll('#howTabs button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('#howTabs button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        renderHowPanel(+btn.dataset.i);
+      });
+    });
+  }
+  wireAccordion();
+  wireLeadForms();
+  updateCompareBar();
+  const reviewForm=document.getElementById('reviewForm');
+  if(reviewForm){
+    reviewForm.addEventListener('submit',e=>{
+      e.preventDefault();
+      const name=document.getElementById('revName').value.trim();
+      const comment=document.getElementById('revComment').value.trim();
+      if(!name||!comment){showToast('Please add your name and a comment');return;}
+      const rating=+document.getElementById('revRating').value;
+      const html=reviewCardHTML({initials:name,rating,date:'Just now',comment,helpful:0});
+      document.getElementById('reviewsList').insertAdjacentHTML('afterbegin',html);
+      reviewForm.reset();
+      showToast('Review submitted for moderation');
+    });
+  }
+}
+window.addEventListener('hashchange',render);
+window.addEventListener('DOMContentLoaded',render);
+render();
+</script>
+</body>
+</html>

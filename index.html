@@ -675,6 +675,44 @@ function plateStyle(i){
 }
 
 const CARS = [
+  // ---- Real listing (dealer-sourced, ELOVAN's own inventory) ----
+  {id:'dodge-challenger-2016-srt-widebody',make:'Dodge',model:'Challenger SRT Widebody Build',year:2016,trim:'3.6L V6 base \u2192 full SRT widebody conversion',bodyType:'Coupe',fuelType:'Petrol',engine:'3.6L Pentastar V6 (genuine 2022 SRT differential fitted)',transmission:'8-Speed Automatic (paddle-shift)',mileage:105633,color:'Gunmetal Grey (metallic)',location:'France (EU sourcing network)',basePriceUSD:30000,price:Math.round(30000*1.15),currency:'USD',availabilityStatus:'Available',reviewCount:0,rating:0,
+    specs:{'Drive':'RWD','Doors':2,'Seats':4,'Build':'Full SRT widebody conversion'},
+    inspection:['Genuine 2022 SRT rear differential installed and verified on inspection lift','SRT widebody kit, fascia and badging professionally fitted','Custom interior retrim (suede console wrap, ambient lighting) in good condition','Odometer reads 170,000 km (\u2248105,633 miles)'],
+    importNotes:['Left-hand drive','Important: base drivetrain is the original 3.6L V6 \u2014 SRT elements are the widebody kit, badging and a swapped-in genuine SRT differential, not a full engine/powertrain swap. Ask us for full build documentation.','Confirm this mileage and 2016 build year fit your import requirements before purchase'],
+    reviews:[],
+    galleryImages:['images/challenger-2016-srt-01-front.jpg','images/challenger-2016-srt-02-front-close.jpg','images/challenger-2016-srt-03-wheel-brake.jpg','images/challenger-2016-srt-04-side-tree.jpg','images/challenger-2016-srt-05-side-parked.jpg','images/challenger-2016-srt-06-interior-console.jpg','images/challenger-2016-srt-07-inspection-lift.jpg','images/challenger-2016-srt-08-front-dusk.jpg','images/challenger-2016-srt-09-front-lights-on.jpg','images/challenger-2016-srt-10-rear-taillight.jpg','images/challenger-2016-srt-11-front-hedge.jpg','images/challenger-2016-srt-12-overhead.jpg','images/challenger-2016-srt-13-rear-side-mural.jpg','images/challenger-2016-srt-14-interior-drive.jpg']},
+  {id:'bmw-320d-2005-estate-warsaw',make:'BMW',model:'320d',year:2005,trim:'320d Automatic (M Sport wheels, panoramic sunroof)',bodyType:'Sedan',fuelType:'Diesel',engine:'2.0L Diesel I4',transmission:'Automatic',mileage:108740,color:'Dark Navy Blue (metallic)',location:'Warsaw, Poland (EU sourcing network)',basePriceUSD:Math.round(4000*1.1565),price:Math.round(Math.round(4000*1.1565)*1.15),currency:'USD',availabilityStatus:'Available',reviewCount:0,rating:0,
+    specs:{'Drive':'RWD','Doors':4,'Seats':5,'Sunroof':'Panoramic'},
+    inspection:['Automatic transmission and diesel drivetrain confirmed operational','Panoramic sunroof, M Sport alloy wheels and leather interior in good condition','Odometer confirmed within the 150,000\u2013200,000 km range \u2014 exact reading to be confirmed in writing before purchase'],
+    importNotes:['Left-hand drive','Base price converted from a \u20ac4,000 EUR listing at the prevailing exchange rate \u2014 final landed cost may shift slightly with currency movement','Confirm this 2005 build year fits your import age requirements before purchase'],
+    reviews:[],
+    galleryImages:['images/bmw-320d-2005-01-front-wash.jpg','images/bmw-320d-2005-02-side-parked.jpg','images/bmw-320d-2005-03-side-sunset.jpg','images/bmw-320d-2005-04-interior-front.jpg','images/bmw-320d-2005-05-dashboard.jpg','images/bmw-320d-2005-06-interior-wide.jpg','images/bmw-320d-2005-07-rear-seats.jpg','images/bmw-320d-2005-08-side-sunset2.jpg']},
+  {id:'audi-a7-2013-sline-berlin',make:'Audi',model:'A7 3.0T Quattro',year:2013,trim:'S-line',bodyType:'Sportback',fuelType:'Petrol',engine:'3.0L TFSI V6 (supercharged)',transmission:'8-Speed Automatic (Tiptronic)',mileage:144780,color:'Black',location:'Berlin, Germany (EU sourcing network)',basePriceUSD:13000,price:Math.round(13000*1.15),currency:'USD',availabilityStatus:'Available',reviewCount:0,rating:0,
+    specs:{'Drive':'AWD (quattro)','Doors':4,'Seats':5,'Trim':'S-line'},
+    inspection:['Full S-line specification confirmed: panoramic sunroof, Bose sound system, 360\u00b0 parking cameras','4-zone climate control, heated and ventilated front seats with memory function tested','Electric trunk/tailgate operation confirmed working','Black headliner and interior trim in good condition','Odometer confirmed at 233,003 km on dash readout'],
+    importNotes:['Left-hand drive','Odometer reads 233,003 km (\u2248144,780 miles) \u2014 confirm this fits your import mileage requirements','Quattro AWD drivetrain \u2014 ask us for servicing history before purchase'],
+    reviews:[],
+    galleryImages:['images/audi-a7-2013-01-front-street.jpg','images/audi-a7-2013-02-dashboard.jpg','images/audi-a7-2013-03-rear-doors-sunset.jpg','images/audi-a7-2013-04-rear-night-rain.jpg','images/audi-a7-2013-05-rear-day-rain.jpg','images/audi-a7-2013-06-rear-straight.jpg','images/audi-a7-2013-07-side-profile.jpg','images/audi-a7-2013-08-rear-cloudy.jpg','images/audi-a7-2013-09-rear-cloudy-flags.jpg']},
+  {id:'hyundai-elantra-2011-porto',make:'Hyundai',model:'Elantra',year:2011,trim:'Standard',bodyType:'Sedan',fuelType:'Petrol',engine:'1.8L I4',transmission:'Automatic',mileage:109983,color:'Black',location:'Porto, Portugal (EU sourcing network)',basePriceUSD:Math.round(4500*1.1565),price:Math.round(Math.round(4500*1.1565)*1.15),currency:'USD',availabilityStatus:'Available',reviewCount:0,rating:0,
+    specs:{'Drive':'FWD','Doors':4,'Seats':5},
+    inspection:['Automatic transmission and 1.8L engine confirmed operational','Exterior and interior in good condition for mileage and age','Odometer confirmed at approximately 177,000 km from photos provided'],
+    importNotes:['Left-hand drive','Odometer reads \u2248177,000 km (\u2248109,980 miles) \u2014 confirm this fits your import mileage requirements','Confirm this 2011 build year fits your import age requirements before purchase'],
+    reviews:[],
+    galleryImages:['images/hyundai-elantra-2011-01-door-interior.jpg','images/hyundai-elantra-2011-02-dashboard-drive.jpg','images/hyundai-elantra-2011-03-rear-seats.jpg','images/hyundai-elantra-2011-04-front-interior.jpg','images/hyundai-elantra-2011-05-side.jpg','images/hyundai-elantra-2011-06-rear-plate.jpg','images/hyundai-elantra-2011-07-front-angle.jpg','images/hyundai-elantra-2011-08-rear-angle.jpg','images/hyundai-elantra-2011-09-front-angle2.jpg']},
+  {id:'chevrolet-camaro-2018-2ss-tuned',make:'Chevrolet',model:'Camaro',year:2018,trim:'2SS (Stage 2 tune, aftermarket exhaust & intake)',bodyType:'Coupe',fuelType:'Petrol',engine:'6.2L V8 (factory, Stage 2 ECU tune)',transmission:'Automatic',mileage:35000,color:'Blue',location:'Barcelona, Spain (EU sourcing network)',basePriceUSD:30000,price:Math.round(30000*1.15),currency:'USD',availabilityStatus:'Available',reviewCount:0,rating:0,
+    specs:{'Drive':'RWD','Doors':2,'Seats':4,'Trim':'2SS'},
+    inspection:['Stage 2 ECU tune confirmed \u2014 seller reports 500+ horsepower (uncertified, no dyno sheet on file)','Aftermarket dual cat-back exhaust, resonator and cold-air intake installed','Carbon fiber front splitter and rear wing fitted','Odometer confirmed within the 20,000\u201350,000 mile range \u2014 exact reading to be confirmed in writing before purchase'],
+    importNotes:['Left-hand drive','Performance modifications and claimed horsepower are as reported by the seller and have not been independently dyno-verified \u2014 ask us for documentation before purchase','Confirm this 2018 build year fits your import age requirements'],
+    reviews:[],
+    galleryImages:['images/camaro-2018-2ss-01.jpg','images/camaro-2018-2ss-02.jpg','images/camaro-2018-2ss-03.jpg','images/camaro-2018-2ss-04.jpg','images/camaro-2018-2ss-05.jpg','images/camaro-2018-2ss-06.jpg','images/camaro-2018-2ss-07.jpg','images/camaro-2018-2ss-08.jpg','images/camaro-2018-2ss-09.jpg','images/camaro-2018-2ss-10.jpg','images/camaro-2018-2ss-11.jpg','images/camaro-2018-2ss-12.jpg','images/camaro-2018-2ss-13.jpg','images/camaro-2018-2ss-14.jpg','images/camaro-2018-2ss-15.jpg','images/camaro-2018-2ss-16.jpg','images/camaro-2018-2ss-17.jpg','images/camaro-2018-2ss-18.jpg']},
+  {id:'honda-accord-2016-ottawa',make:'Honda',model:'Accord',year:2016,trim:'Standard (exact trim to be confirmed)',bodyType:'Sedan',fuelType:'Petrol',engine:'2.4L I4 (estimated \u2014 confirm exact spec with seller)',transmission:'Automatic (confirm exact spec)',mileage:106216,mileageUnit:'km',color:'White',location:'Ottawa, ON, Canada (dealer network)',basePriceUSD:18000,price:Math.round(18000*1.15),currency:'USD',availabilityStatus:'Available',reviewCount:0,rating:0,
+    specs:{'Drive':'FWD','Doors':4,'Seats':5},
+    inspection:['Exterior and interior photographed in good condition','Odometer confirmed at 66,000 miles (\u2248106,216 km) from photos provided','Trim level and exact engine spec to be confirmed with seller before purchase'],
+    importNotes:['Left-hand drive','Confirm this 2016 build year fits your import age requirements before purchase','Located in Ottawa, Canada \u2014 confirm cross-border logistics with our team'],
+    reviews:[],
+    galleryImages:['images/honda-accord-2016-01-rear.jpg','images/honda-accord-2016-02-front.jpg','images/honda-accord-2016-03-dashboard.jpg']},
+  // ---- Demo / placeholder inventory below (clearly not real listings) ----
   {id:'toyota-camry-xse-2021',make:'Toyota',model:'Camry XSE',year:2021,trim:'XSE V6',bodyType:'Sedan',fuelType:'Petrol',engine:'3.5L V6',transmission:'8-Speed Automatic',mileage:24500,color:'Midnight Black',location:'Toronto, CA',price:24800,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.5,
     specs:{'Drive':'FWD','Doors':4,'Seats':5,'MPG (city/hwy)':'22/32'},
     inspection:['150-point mechanical inspection passed','No accident history on record','Clean title verified'],
@@ -793,6 +831,21 @@ function navigate(hash){ location.hash = hash; }
 /* ============================================================
    CAR CARD COMPONENT
    ============================================================ */
+function cardMediaHTML(car, idx){
+  if(car.galleryImages && car.galleryImages.length){
+    return `<img src="${car.galleryImages[0]}" alt="${car.year} ${car.make} ${car.model}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">`;
+  }
+  return `<div class="plate" style="background:${plateStyle(idx)}"></div>${carSVG()}`;
+}
+function renderGalleryMedia(containerId, car, idx){
+  const el=document.getElementById(containerId);
+  if(!el) return;
+  if(car.galleryImages && car.galleryImages.length){
+    el.innerHTML = `<img src="${car.galleryImages[idx]}" alt="${car.year} ${car.make} ${car.model} photo ${idx+1}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">`;
+  } else {
+    el.innerHTML = `<div class="plate" style="background:${plateStyle(idx)}"></div>${carSVG()}`;
+  }
+}
 function carCardHTML(car, idx){
   const fav = state.wishlist.has(car.id) ? 'active' : '';
   const cmp = state.compare.has(car.id) ? 'checked' : '';
@@ -800,8 +853,7 @@ function carCardHTML(car, idx){
   <article class="car-card">
     <a href="#/cars/${car.id}" class="car-media hud-frame" aria-label="View ${car.year} ${car.make} ${car.model}">
       <span class="hud-c1"></span><span class="hud-c2"></span><span class="hud-scan"></span>
-      <div class="plate" style="background:${plateStyle(idx)}"></div>
-      ${carSVG()}
+      ${cardMediaHTML(car, idx)}
       <div class="car-badges">${statusBadge(car.availabilityStatus)}</div>
     </a>
     <button class="fav-btn ${fav}" aria-label="Save to wishlist" onclick="toggleWishlist(event,'${car.id}')">${ICONS.heart}</button>
@@ -810,9 +862,9 @@ function carCardHTML(car, idx){
         <div class="car-title">${car.year} ${car.make} ${car.model}</div>
         <div class="car-sub">${car.trim} · ${car.location}</div>
       </div>
-      ${starRow(car.rating)} <span style="font-size:.72rem;color:var(--text-faint)">(${car.reviewCount} reviews)</span>
+      ${car.reviewCount>0 ? `${starRow(car.rating)} <span style="font-size:.72rem;color:var(--text-faint)">(${car.reviewCount} reviews)</span>` : `<span class="spec-chip" style="color:var(--gold);border-color:var(--gold-dim);">New listing</span>`}
       <div class="chip-row">
-        <span class="spec-chip">${ICONS.mileage}${car.mileage.toLocaleString()} mi</span>
+        <span class="spec-chip">${ICONS.mileage}${car.mileage.toLocaleString()} ${car.mileageUnit||'mi'}</span>
         <span class="spec-chip">${ICONS.transmission}${car.transmission.split(' ')[0]}</span>
         <span class="spec-chip">${ICONS.fuel}${car.fuelType}</span>
       </div>
@@ -857,7 +909,7 @@ function renderCompareModal(){
   const rows = ['Price','Year','Body Type','Mileage','Transmission','Fuel Type','Location','Availability'];
   let html = '<table class="compare-table"><tr><th>Spec</th>'+cars.map(c=>`<th>${c.make} ${c.model}</th>`).join('')+'</tr>';
   const getVal=(c,r)=>({
-    'Price':money(c.price),'Year':c.year,'Body Type':c.bodyType,'Mileage':c.mileage.toLocaleString()+' mi',
+    'Price':money(c.price),'Year':c.year,'Body Type':c.bodyType,'Mileage':c.mileage.toLocaleString()+' '+(c.mileageUnit||'mi'),
     'Transmission':c.transmission,'Fuel Type':c.fuelType,'Location':c.location,'Availability':c.availabilityStatus
   }[r]);
   rows.forEach(r=>{ html += `<tr><td>${r}</td>${cars.map(c=>`<td>${getVal(c,r)}</td>`).join('')}</tr>`; });
@@ -1116,26 +1168,27 @@ function simulateLoad(cb){
 function pageCarDetail(id){
   const car = CARS.find(c=>c.id===id);
   if(!car) return `<div class="section container"><div class="empty-state">${ICONS.empty}<h4>Car not found</h4><p>This listing may have been removed.</p><a class="btn btn-secondary btn-sm" href="#/cars">Back to inventory</a></div></div>`;
-  const gallery = Array.from({length:5});
+  const hasReal = car.galleryImages && car.galleryImages.length;
+  const galleryCount = hasReal ? car.galleryImages.length : 5;
+  const gallery = Array.from({length:galleryCount});
   const idx = CARS.indexOf(car);
   return `
   <section class="section container">
     <a href="#/cars" class="btn-ghost" style="display:inline-flex;margin-bottom:var(--sp-2);">← Back to inventory</a>
     <div class="detail-grid">
       <div>
-        <div class="gallery-main hud-frame hud-active" id="galleryMain" onclick="openLightbox(0)">
+        <div class="gallery-main hud-frame hud-active" id="galleryMain" onclick="openLightbox(currentGalleryIndex)">
           <span class="hud-c1"></span><span class="hud-c2"></span><span class="hud-scan"></span>
-          <div class="plate" style="background:${plateStyle(idx)}"></div>
-          ${carSVG()}
+          <div id="galleryMainMedia" style="position:absolute;inset:0;"></div>
           <div class="car-badges">${statusBadge(car.availabilityStatus)}</div>
         </div>
         <div class="gallery-thumbs" id="galleryThumbs">
-          ${gallery.map((_,i)=>`<button class="thumb ${i===0?'active':''}" data-i="${i}" onclick="setThumb(${i})" aria-label="View photo ${i+1}"><div class="plate" style="background:${plateStyle(idx+i)}"></div>${carSVG()}</button>`).join('')}
+          ${gallery.map((_,i)=>`<button class="thumb ${i===0?'active':''}" data-i="${i}" onclick="setThumb(${i})" aria-label="View photo ${i+1}">${hasReal ? `<img src="${car.galleryImages[i]}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">` : `<div class="plate" style="background:${plateStyle(idx+i)}"></div>${carSVG()}`}</button>`).join('')}
         </div>
 
         <div class="spec-grid">
           <div class="spec-tile">${ICONS.engine}<b>${car.engine}</b><span>Engine</span></div>
-          <div class="spec-tile">${ICONS.mileage}<b>${car.mileage.toLocaleString()} mi</b><span>Mileage</span></div>
+          <div class="spec-tile">${ICONS.mileage}<b>${car.mileage.toLocaleString()} ${car.mileageUnit||'mi'}</b><span>Mileage</span></div>
           <div class="spec-tile">${ICONS.transmission}<b>${car.transmission}</b><span>Transmission</span></div>
           <div class="spec-tile">${ICONS.fuel}<b>${car.fuelType}</b><span>Fuel type</span></div>
           <div class="spec-tile">${ICONS.body}<b>${car.bodyType}</b><span>Body type</span></div>
@@ -1154,8 +1207,7 @@ function pageCarDetail(id){
         <div class="section" style="padding-top:var(--sp-4);padding-bottom:0;">
           <div class="section-head"><div class="eyebrow">Reviews for this exact car</div><h3 class="h3">What buyers say</h3></div>
           <div class="review-summary">
-            <div class="score">${car.rating.toFixed(1)}</div>
-            <div>${starRow(car.rating)}<div style="font-size:.78rem;color:var(--text-faint);margin-top:4px;">${car.reviewCount} review${car.reviewCount===1?'':'s'}</div></div>
+            ${car.reviewCount>0 ? `<div class="score">${car.rating.toFixed(1)}</div><div>${starRow(car.rating)}<div style="font-size:.78rem;color:var(--text-faint);margin-top:4px;">${car.reviewCount} review${car.reviewCount===1?'':'s'}</div></div>` : `<div style="font-size:.88rem;color:var(--text-muted);">No reviews yet — be the first to review this car.</div>`}
           </div>
           <div id="reviewsList">${car.reviews.map((r,i)=>reviewCardHTML(r,i)).join('')}</div>
           <div class="side-card" style="margin-top:var(--sp-3);">
@@ -1217,24 +1269,38 @@ function markHelpful(btn){
   btn.textContent = `👍 Helpful (${n+1})`;
   btn.disabled=true;
 }
+let currentGalleryIndex=0;
 function setThumb(i){
+  currentGalleryIndex=i;
   document.querySelectorAll('#galleryThumbs .thumb').forEach((t,idx)=>t.classList.toggle('active',idx===i));
+  if(state.activeCar) renderGalleryMedia('galleryMainMedia', state.activeCar, i);
 }
 
 /* ---------- lightbox ---------- */
 let lightboxIndex=0, lightboxTotal=5;
 function openLightbox(i){
   lightboxIndex=i;
+  const car=state.activeCar;
+  lightboxTotal = (car && car.galleryImages) ? car.galleryImages.length : 5;
   document.getElementById('lightbox').classList.add('open');
   renderLightbox();
 }
 function renderLightbox(){
   const stage=document.getElementById('lightboxStage');
-  const existing = stage.querySelector('.plate,svg');
-  stage.querySelectorAll('.plate,svg').forEach(e=>e.remove());
-  const plate=document.createElement('div'); plate.className='plate'; plate.style.background=plateStyle(lightboxIndex);
-  stage.prepend(plate);
-  stage.insertAdjacentHTML('beforeend',carSVG());
+  stage.querySelectorAll('.plate,svg,img.lb-img').forEach(e=>e.remove());
+  const car=state.activeCar;
+  if(car && car.galleryImages && car.galleryImages.length){
+    const img=document.createElement('img');
+    img.className='lb-img';
+    img.src=car.galleryImages[lightboxIndex];
+    img.alt=`${car.year} ${car.make} ${car.model} photo ${lightboxIndex+1}`;
+    img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#05070a;';
+    stage.prepend(img);
+  } else {
+    const plate=document.createElement('div'); plate.className='plate'; plate.style.background=plateStyle(lightboxIndex);
+    stage.prepend(plate);
+    stage.insertAdjacentHTML('beforeend',carSVG());
+  }
   document.getElementById('lightboxCount').textContent = `${lightboxIndex+1} / ${lightboxTotal}`;
 }
 document.getElementById('lightboxClose').addEventListener('click',()=>document.getElementById('lightbox').classList.remove('open'));
@@ -1629,6 +1695,14 @@ function render(){
   });
 
   if(route==='/cars') wireCarsPage();
+  if(route==='/cars/:id'){
+    const car = CARS.find(c=>c.id===params.id);
+    state.activeCar = car || null;
+    currentGalleryIndex = 0;
+    if(car) renderGalleryMedia('galleryMainMedia', car, 0);
+  } else {
+    state.activeCar = null;
+  }
   if(route==='/how-it-works'){
     renderHowPanel(0);
     document.querySelectorAll('#howTabs button').forEach(btn=>{

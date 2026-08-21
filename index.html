@@ -866,9 +866,12 @@ function navigate(hash){ location.hash = hash; }
 function imgFallbackHTML(idx){
   return `<div class="plate" style="background:${plateStyle(idx)}"></div>${carSVG()}`;
 }
+function handleImgError(imgEl, idx){
+  if(imgEl && imgEl.parentElement){ imgEl.parentElement.innerHTML = imgFallbackHTML(idx); }
+}
 function cardMediaHTML(car, idx){
   if(car.galleryImages && car.galleryImages.length){
-    return `<img src="${car.galleryImages[0]}" alt="${car.year} ${car.make} ${car.model}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='${imgFallbackHTML(idx).replace(/'/g,"\\'")}';">`;
+    return `<img src="${car.galleryImages[0]}" alt="${car.year} ${car.make} ${car.model}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="handleImgError(this, ${idx})">`;
   }
   return imgFallbackHTML(idx);
 }
@@ -876,7 +879,7 @@ function renderGalleryMedia(containerId, car, idx){
   const el=document.getElementById(containerId);
   if(!el) return;
   if(car.galleryImages && car.galleryImages.length){
-    el.innerHTML = `<img src="${car.galleryImages[idx]}" alt="${car.year} ${car.make} ${car.model} photo ${idx+1}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='${imgFallbackHTML(idx).replace(/'/g,"\\'")}';">`;
+    el.innerHTML = `<img src="${car.galleryImages[idx]}" alt="${car.year} ${car.make} ${car.model} photo ${idx+1}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="handleImgError(this, ${idx})">`;
   } else {
     el.innerHTML = imgFallbackHTML(idx);
   }
@@ -1218,7 +1221,7 @@ function pageCarDetail(id){
           <div class="car-badges">${statusBadge(car.availabilityStatus)}</div>
         </div>
         <div class="gallery-thumbs" id="galleryThumbs">
-          ${gallery.map((_,i)=>`<button class="thumb ${i===0?'active':''}" data-i="${i}" onclick="setThumb(${i})" aria-label="View photo ${i+1}">${hasReal ? `<img src="${car.galleryImages[i]}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='${imgFallbackHTML(idx+i).replace(/'/g,"\\'")}';">` : imgFallbackHTML(idx+i)}</button>`).join('')}
+          ${gallery.map((_,i)=>`<button class="thumb ${i===0?'active':''}" data-i="${i}" onclick="setThumb(${i})" aria-label="View photo ${i+1}">${hasReal ? `<img src="${car.galleryImages[i]}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="handleImgError(this, ${idx+i})">` : imgFallbackHTML(idx+i)}</button>`).join('')}
         </div>
 
         <div class="spec-grid">

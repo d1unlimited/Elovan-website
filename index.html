@@ -249,6 +249,8 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:0;col
 .badge-available{background:rgba(76,122,94,.14);color:var(--success);border:1px solid rgba(76,122,94,.35);}
 .badge-reserved{background:rgba(184,134,46,.14);color:var(--warn);border:1px solid rgba(184,134,46,.35);}
 .badge-sold{background:rgba(158,59,59,.13);color:var(--error);border:1px solid rgba(158,59,59,.35);}
+.badge-catalog{background:rgba(122,46,46,.10);color:var(--gold);border:1px solid rgba(122,46,46,.32);}
+.catalog-note{font-size:.7rem;color:var(--text-faint);font-family:var(--font-mono);margin-top:2px;}
 .fav-btn{position:absolute;top:10px;right:10px;z-index:3;width:34px;height:34px;border-radius:50%;background:rgba(10,14,19,.55);backdrop-filter:blur(6px);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:.2s;}
 .fav-btn:hover{color:var(--gold);}
 .fav-btn.active{color:var(--gold);border-color:var(--gold);}
@@ -543,43 +545,10 @@ footer{border-top:1px solid var(--border-soft);margin-top:var(--sp-6);padding:va
   <a class="btn btn-primary" id="mobileWhatsappBtn" href="#" target="_blank" rel="noopener">WhatsApp Us</a>
 </div>
 
-<!-- Live chat — real-time, backed by Firebase Realtime Database. See FIREBASE-SETUP.md -->
-<button class="chat-fab" id="chatFab" aria-label="Open live chat" style="background:var(--teal);color:#fff;border:none;box-shadow:0 8px 24px rgba(169,117,46,.35);cursor:pointer;">
+<!-- WhatsApp floating action button — real-time contact, no third-party backend required -->
+<button class="chat-fab" id="chatFab" aria-label="Chat with ELOVAN on WhatsApp" style="background:var(--teal);color:#fff;border:none;box-shadow:0 8px 24px rgba(169,117,46,.35);cursor:pointer;">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
 </button>
-<div class="chat-panel" id="chatPanel" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);flex-direction:column;box-shadow:0 20px 60px rgba(43,34,22,.25);">
-  <div class="chat-head">
-    <div><b>Chat with ELOVAN</b><br><span id="chatStatus"><span style="width:7px;height:7px;border-radius:50%;background:var(--success);display:inline-block;"></span> We usually reply fast</span></div>
-    <button class="chat-close" id="chatClose" aria-label="Close chat">×</button>
-  </div>
-  <div class="chat-context" id="chatContextLine" style="display:none;"></div>
-  <div class="chat-body" id="chatBody">
-    <div class="chat-fallback">Send us a message and a real member of the ELOVAN team will reply here — no bots.</div>
-  </div>
-  <div class="chat-input-row">
-    <input type="text" id="chatInput" placeholder="Type a message…" maxlength="600">
-    <button class="btn btn-primary btn-sm" id="chatSend">Send</button>
-  </div>
-</div>
-<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-database-compat.js"></script>
-<script>
-  // ⚠️ Paste your own Firebase project config here — see FIREBASE-SETUP.md
-  const firebaseConfig = {
-    apiKey: "AIzaSyDDHwUbgLOM4zoHvMumKqFyPmrR_UdYi9o",
-    authDomain: "elovan-chat.firebaseapp.com",
-    databaseURL: "https://elovan-chat-default-rtdb.firebaseio.com",
-    projectId: "elovan-chat",
-    storageBucket: "elovan-chat.firebasestorage.app",
-    messagingSenderId: "46019176438",
-    appId: "1:46019176438:web:042f7f6b711e79cdb149d7"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const chatAuth = firebase.auth();
-  const chatDb = firebase.database();
-</script>
-
 
 <!-- lightbox -->
 <div class="lightbox" id="lightbox" role="dialog" aria-label="Image gallery">
@@ -631,8 +600,8 @@ footer{border-top:1px solid var(--border-soft);margin-top:var(--sp-6);padding:va
         <ul>
           <li><a href="#/faq">FAQ</a></li>
           <li><a href="#/contact">Contact us</a></li>
-          <li><a href="#" data-toast="Privacy policy — placeholder page">Privacy policy</a></li>
-          <li><a href="#" data-toast="Terms of service — placeholder page">Terms of service</a></li>
+          <li><a href="#/privacy">Privacy policy</a></li>
+          <li><a href="#/terms">Terms of service</a></li>
         </ul>
       </div>
       <div>
@@ -645,7 +614,7 @@ footer{border-top:1px solid var(--border-soft);margin-top:var(--sp-6);padding:va
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 ELOVAN Imports. Demo build — all listings are placeholders.</span>
+      <span>© 2026 ELOVAN Imports. All rights reserved.</span>
       <span>Lagos · Abuja · Port Harcourt — remote sourcing worldwide</span>
     </div>
   </div>
@@ -654,9 +623,6 @@ footer{border-top:1px solid var(--border-soft);margin-top:var(--sp-6);padding:va
 <script>
 /* ============================================================
    CONTACT CHANNELS — WhatsApp helper.
-   openLiveChat() is defined further down, backed by Firebase
-   Realtime Database (see the chat widget wiring near the end
-   of this file).
    ============================================================ */
 const WHATSAPP_NUMBER = '16132205445'; // no + or spaces, per wa.me format
 function waLink(message){
@@ -744,80 +710,69 @@ const CARS = [
     importNotes:['Left-hand drive','Confirm this 2021 build year fits your import age requirements before purchase','Located in Ottawa, Canada — confirm cross-border logistics with our team'],
     reviews:[],
     galleryImages:['images/toyota-chr-2021-01-front-quarter.webp','images/toyota-chr-2021-02-rear-quarter.webp','images/toyota-chr-2021-03-rear-straight.webp','images/toyota-chr-2021-04-rear-quarter-alt.webp','images/toyota-chr-2021-05-interior-front-seats.webp','images/toyota-chr-2021-06-interior-dash-wide.webp','images/toyota-chr-2021-07-steering-dash.webp','images/toyota-chr-2021-08-steering-close.webp','images/toyota-chr-2021-09-steering-buttons.webp','images/toyota-chr-2021-10-cruise-stalk.webp','images/toyota-chr-2021-11-door-open-seats.webp','images/toyota-chr-2021-12-seat-controls.webp','images/toyota-chr-2021-13-door-panel-controls.webp','images/toyota-chr-2021-14-dash-buttons.webp','images/toyota-chr-2021-15-engine-start-button.webp','images/toyota-chr-2021-16-odometer.webp','images/toyota-chr-2021-17-infotainment-home.webp','images/toyota-chr-2021-18-infotainment-home-close.webp','images/toyota-chr-2021-19-infotainment-menu.webp','images/toyota-chr-2021-20-carplay.webp']},
-  // ---- Demo / placeholder inventory below (clearly not real listings) ----
-  {id:'toyota-camry-xse-2021',make:'Toyota',model:'Camry XSE',year:2021,trim:'XSE V6',bodyType:'Sedan',fuelType:'Petrol',engine:'3.5L V6',transmission:'8-Speed Automatic',mileage:24500,color:'Midnight Black',location:'Toronto, CA',price:24800,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.5,
-    specs:{'Drive':'FWD','Doors':4,'Seats':5,'MPG (city/hwy)':'22/32'},
-    inspection:['150-point mechanical inspection passed','No accident history on record','Clean title verified'],
-    importNotes:['Left-hand drive, Nigeria-compliant','Under 8 years — meets import age rule'],
-    reviews:[{initials:'T.O.',rating:5,date:'Jul 2026',comment:'Exactly as described on the call. The team sent extra engine bay photos before I paid the deposit.',helpful:9},
-             {initials:'B.A.',rating:4,date:'Jun 2026',comment:'Smooth process, shipping took slightly longer than the estimate but support kept me updated.',helpful:5}]},
-  {id:'honda-crv-exl-2022',make:'Honda',model:'CR-V EX-L',year:2022,trim:'EX-L AWD',bodyType:'SUV',fuelType:'Petrol',engine:'1.5L Turbo I4',transmission:'CVT Automatic',mileage:18200,color:'Platinum White',location:'Columbus, US',price:27950,currency:'USD',availabilityStatus:'Available',reviewCount:3,rating:4.7,
-    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'27/32'},
-    inspection:['Full diagnostic scan — no fault codes','Brakes and tires above 80% life','Interior odor and stain check passed'],
-    importNotes:['Left-hand drive, Nigeria-compliant','Panoramic roof — confirm customs classification'],
-    reviews:[{initials:'K.N.',rating:5,date:'Aug 2026',comment:'Best CR-V price I found after comparing three other importers. Documentation was ready ahead of schedule.',helpful:12},
-             {initials:'F.E.',rating:5,date:'Jul 2026',comment:'Asked for extra undercarriage photos and got them within the hour. Very responsive team.',helpful:7},
-             {initials:'S.U.',rating:4,date:'May 2026',comment:'Good experience overall, would like more frequent shipping updates next time.',helpful:3}]},
-  {id:'nissan-altima-sl-2020',make:'Nissan',model:'Altima SL',year:2020,trim:'SL FWD',bodyType:'Sedan',fuelType:'Petrol',engine:'2.5L I4',transmission:'CVT Automatic',mileage:33100,color:'Gun Metallic',location:'Newark, US',price:16200,currency:'USD',availabilityStatus:'Reserved',reviewCount:2,rating:4.2,
-    specs:{'Drive':'FWD','Doors':4,'Seats':5,'MPG (city/hwy)':'28/39'},
-    inspection:['Compression test passed on all cylinders','Minor door-edge touch-up noted in report'],
-    importNotes:['Left-hand drive, Nigeria-compliant'],
-    reviews:[{initials:'D.I.',rating:4,date:'Jun 2026',comment:'Reserved this one quickly after the price alert. Waiting on an alternative in the meantime.',helpful:4},
-             {initials:'M.O.',rating:4,date:'Apr 2026',comment:'Inspection report was detailed and matched the car exactly on arrival.',helpful:6}]},
-  {id:'lexus-rx350-2022',make:'Lexus',model:'RX 350',year:2022,trim:'Premium',bodyType:'SUV',fuelType:'Petrol',engine:'3.5L V6',transmission:'8-Speed Automatic',mileage:15800,color:'Nightfall Mica',location:'Los Angeles, US',price:41500,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.8,
-    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'20/27'},
-    inspection:['Certified pre-owned checklist passed','Original factory paint confirmed via thickness gauge'],
-    importNotes:['Left-hand drive, Nigeria-compliant','High resale demand — verified market value attached'],
-    reviews:[{initials:'A.K.',rating:5,date:'Aug 2026',comment:'Paint thickness readings were shared unprompted — that level of detail sold me.',helpful:14},
-             {initials:'C.J.',rating:5,date:'Jul 2026',comment:'Premium car, premium process. Delivery arrived two days ahead of the estimate.',helpful:8}]},
-  {id:'bmw-330i-2021',make:'BMW',model:'3 Series 330i',year:2021,trim:'330i xDrive',bodyType:'Sedan',fuelType:'Petrol',engine:'2.0L Turbo I4',transmission:'8-Speed Automatic',mileage:21000,color:'Alpine White',location:'Chicago, US',price:29900,currency:'USD',availabilityStatus:'Sold',reviewCount:2,rating:4.6,
-    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'25/34'},
-    inspection:['Dealer service history attached','Turbo boost pressure tested normal'],
-    importNotes:['Left-hand drive, Nigeria-compliant'],
-    reviews:[{initials:'R.T.',rating:5,date:'May 2026',comment:'Already delivered and cleared customs — drives like new. Waitlist is worth it for the right car.',helpful:11},
-             {initials:'O.P.',rating:4,date:'Mar 2026',comment:'Great car, just wish more spec photos were up before I asked directly.',helpful:2}]},
-  {id:'mercedes-glc300-2022',make:'Mercedes-Benz',model:'GLC 300',year:2022,trim:'4MATIC',bodyType:'SUV',fuelType:'Petrol',engine:'2.0L Turbo I4',transmission:'9-Speed Automatic',mileage:12400,color:'Selenite Grey',location:'Boston, US',price:38700,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.6,
-    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'23/28'},
-    inspection:['Full detailing and mechanical check passed','Battery health at 96%'],
-    importNotes:['Left-hand drive, Nigeria-compliant','Low mileage — priority verification tier'],
-    reviews:[{initials:'N.C.',rating:5,date:'Jul 2026',comment:'Lower mileage than most listings I saw elsewhere at this price point.',helpful:6},
-             {initials:'I.B.',rating:4,date:'Jun 2026',comment:'Quote form prefilled with the car details, made asking questions fast.',helpful:3}]},
-  {id:'vw-tiguan-se-2021',make:'Volkswagen',model:'Tiguan SE',year:2021,trim:'SE 4Motion',bodyType:'Crossover',fuelType:'Petrol',engine:'2.0L Turbo I4',transmission:'8-Speed Automatic',mileage:27600,color:'Deep Black Pearl',location:'Atlanta, US',price:21300,currency:'USD',availabilityStatus:'Reserved',reviewCount:1,rating:4.3,
-    specs:{'Drive':'AWD','Doors':4,'Seats':7,'MPG (city/hwy)':'23/29'},
-    inspection:['Third-row seating mechanism tested','Timing chain service confirmed current'],
-    importNotes:['Left-hand drive, Nigeria-compliant'],
-    reviews:[{initials:'G.L.',rating:4,date:'May 2026',comment:'7-seater configuration was exactly what my family needed, currently on hold for us.',helpful:5}]},
-  {id:'ford-explorer-xlt-2020',make:'Ford',model:'Explorer XLT',year:2020,trim:'XLT 4WD',bodyType:'SUV',fuelType:'Petrol',engine:'2.3L EcoBoost I4',transmission:'10-Speed Automatic',mileage:38900,color:'Iconic Silver',location:'Detroit, US',price:19600,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.1,
-    specs:{'Drive':'4WD','Doors':4,'Seats':7,'MPG (city/hwy)':'21/28'},
-    inspection:['Frame and undercarriage rust check passed','Tow package verified functional'],
-    importNotes:['Left-hand drive, Nigeria-compliant'],
-    reviews:[{initials:'U.E.',rating:4,date:'Apr 2026',comment:'Higher mileage but priced fairly for it — inspection notes were upfront about wear.',helpful:4},
-             {initials:'J.M.',rating:4,date:'Feb 2026',comment:'Good family SUV, arrived clean and as photographed.',helpful:2}]},
-  {id:'audi-q5-premium-2022',make:'Audi',model:'Q5 Premium',year:2022,trim:'Premium Plus',bodyType:'SUV',fuelType:'Petrol',engine:'2.0L TFSI I4',transmission:'7-Speed S tronic',mileage:14100,color:'Glacier White',location:'Houston, US',price:36400,currency:'USD',availabilityStatus:'Sold',reviewCount:2,rating:4.7,
-    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'23/27'},
-    inspection:['Quattro drivetrain tested under load','Infotainment and sensors fully functional'],
-    importNotes:['Left-hand drive, Nigeria-compliant'],
-    reviews:[{initials:'P.A.',rating:5,date:'Jun 2026',comment:'Waitlisted for a similar Q5 now after seeing how this one turned out for a friend.',helpful:9},
-             {initials:'H.S.',rating:4,date:'Apr 2026',comment:'Clean transaction from quote to delivery confirmation.',helpful:3}]},
-  {id:'toyota-rav4-xle-2021',make:'Toyota',model:'RAV4 XLE',year:2021,trim:'XLE AWD',bodyType:'Crossover',fuelType:'Hybrid',engine:'2.5L Hybrid I4',transmission:'e-CVT',mileage:22300,color:'Ruby Flare Pearl',location:'Denver, US',price:26100,currency:'USD',availabilityStatus:'Available',reviewCount:3,rating:4.6,
-    specs:{'Drive':'AWD','Doors':4,'Seats':5,'MPG (city/hwy)':'41/38'},
-    inspection:['Hybrid battery health test passed','Regenerative braking system checked'],
-    importNotes:['Left-hand drive, Nigeria-compliant','Hybrid — confirm local service network before purchase'],
-    reviews:[{initials:'L.D.',rating:5,date:'Aug 2026',comment:'Fuel economy numbers matched what the team quoted almost exactly.',helpful:10},
-             {initials:'V.K.',rating:4,date:'Jul 2026',comment:'Asked about hybrid battery warranty and got a clear written answer same day.',helpful:5},
-             {initials:'Y.A.',rating:5,date:'May 2026',comment:'Great condition for the mileage, very happy with this purchase.',helpful:6}]},
-  {id:'honda-accord-sport-2020',make:'Honda',model:'Accord Sport',year:2020,trim:'Sport 2.0T',bodyType:'Sedan',fuelType:'Petrol',engine:'2.0L Turbo I4',transmission:'10-Speed Automatic',mileage:29700,color:'Crystal Black Pearl',location:'Charlotte, US',price:20400,currency:'USD',availabilityStatus:'Available',reviewCount:2,rating:4.4,
-    specs:{'Drive':'FWD','Doors':4,'Seats':5,'MPG (city/hwy)':'22/32'},
-    inspection:['Turbo and cooling system pressure tested','Suspension bushings checked'],
-    importNotes:['Left-hand drive, Nigeria-compliant'],
-    reviews:[{initials:'Z.O.',rating:5,date:'Jun 2026',comment:'Sport trim drives great, exactly matched the spec sheet on the listing.',helpful:7},
-             {initials:'E.N.',rating:4,date:'Mar 2026',comment:'Good value pick, minor delay in paperwork but resolved quickly.',helpful:3}]},
-  {id:'vw-golf-gti-2020',make:'Volkswagen',model:'Golf GTI',year:2020,trim:'SE',bodyType:'Hatchback',fuelType:'Petrol',engine:'2.0L Turbo I4',transmission:'7-Speed DSG',mileage:26800,color:'Tornado Red',location:'Portland, US',price:18900,currency:'USD',availabilityStatus:'Reserved',reviewCount:2,rating:4.5,
-    specs:{'Drive':'FWD','Doors':4,'Seats':5,'MPG (city/hwy)':'24/32'},
-    inspection:['Clutch and DSG service history verified','Performance brakes checked at 85% life'],
-    importNotes:['Left-hand drive, Nigeria-compliant','Enthusiast trim — high demand, limited availability'],
-    reviews:[{initials:'W.T.',rating:5,date:'Jul 2026',comment:'Reserved within a day of listing — GTIs move fast on this site.',helpful:8},
-             {initials:'Q.R.',rating:4,date:'May 2026',comment:'Great condition, hoping the next one comes with the same DSG service history.',helpful:4}]}
+  // ---- Catalog: popular Nigeria-import models we source to order ----
+  // Reference photos only (not the exact physical unit) — final year/trim/
+  // mileage/color confirmed with you once we source your specific vehicle.
+  {id:'catalog-toyota-camry',make:'Toyota',model:'Camry',year:2023,trim:'SE',bodyType:'Sedan',fuelType:'Petrol',engine:'2.5L Dynamic Force I4',transmission:'8-Speed Automatic',mileage:30000,mileageUnit:'km',color:'Pearl White',location:'North America sourcing network',basePriceUSD:21000,price:Math.round(21000*1.15),currency:'USD',availabilityStatus:'Sourced to Order',catalogOnly:true,reviewCount:0,rating:0,
+    specs:{'Drive':'FWD','Doors':4,'Seats':5,'Trim':'SE'},
+    inspection:['Every unit we source goes through our full mechanical, cosmetic and title-history inspection before it ships','Photo shown is a reference vehicle of this exact model/trim — your specific unit’s inspection report is provided once sourced'],
+    importNotes:['Left-hand drive, Nigeria-compliant','Typical configuration shown — tell us your preferred year/trim/mileage and budget and we’ll match you to a specific unit'],
+    reviews:[],
+    galleryImages:['images/catalog-toyota-camry-2023-01.jpg']},
+  {id:'catalog-toyota-corolla',make:'Toyota',model:'Corolla',year:2023,trim:'SE',bodyType:'Sedan',fuelType:'Petrol',engine:'2.0L Dynamic Force I4',transmission:'CVT',mileage:25000,mileageUnit:'km',color:'Silver Metallic',location:'North America sourcing network',basePriceUSD:17000,price:Math.round(17000*1.15),currency:'USD',availabilityStatus:'Sourced to Order',catalogOnly:true,reviewCount:0,rating:0,
+    specs:{'Drive':'FWD','Doors':4,'Seats':5,'Trim':'SE'},
+    inspection:['Every unit we source goes through our full mechanical, cosmetic and title-history inspection before it ships','Photo shown is a reference vehicle of this exact model/trim — your specific unit’s inspection report is provided once sourced'],
+    importNotes:['Left-hand drive, Nigeria-compliant','One of the most requested models for Nigeria — usually our fastest turnaround to source'],
+    reviews:[],
+    galleryImages:['images/catalog-toyota-corolla-2023-01.jpg']},
+  {id:'catalog-toyota-highlander',make:'Toyota',model:'Highlander',year:2020,trim:'XLE AWD',bodyType:'SUV',fuelType:'Petrol',engine:'3.5L V6',transmission:'8-Speed Automatic',mileage:70000,mileageUnit:'km',color:'Celestial Silver',location:'North America sourcing network',basePriceUSD:24000,price:Math.round(24000*1.15),currency:'USD',availabilityStatus:'Sourced to Order',catalogOnly:true,reviewCount:0,rating:0,
+    specs:{'Drive':'AWD','Doors':4,'Seats':7,'Trim':'XLE'},
+    inspection:['Every unit we source goes through our full mechanical, cosmetic and title-history inspection before it ships','Photo shown is a reference vehicle of this exact model/trim — your specific unit’s inspection report is provided once sourced'],
+    importNotes:['Left-hand drive, Nigeria-compliant','3-row family SUV — a top request from buyers with larger families'],
+    reviews:[],
+    galleryImages:['images/catalog-toyota-highlander-2020-01.jpg']},
+  {id:'catalog-toyota-sienna',make:'Toyota',model:'Sienna',year:2021,trim:'XLE Hybrid AWD',bodyType:'Minivan',fuelType:'Hybrid',engine:'2.5L Hybrid I4',transmission:'e-CVT',mileage:55000,mileageUnit:'km',color:'Wind Chill Pearl',location:'North America sourcing network',basePriceUSD:27000,price:Math.round(27000*1.15),currency:'USD',availabilityStatus:'Sourced to Order',catalogOnly:true,reviewCount:0,rating:0,
+    specs:{'Drive':'AWD','Doors':4,'Seats':7,'Trim':'XLE Hybrid'},
+    inspection:['Every unit we source goes through our full mechanical, cosmetic and title-history inspection before it ships','Photo shown is a reference vehicle of this exact model/trim — your specific unit’s inspection report is provided once sourced'],
+    importNotes:['Left-hand drive, Nigeria-compliant','Hybrid — confirm local service network availability before purchase'],
+    reviews:[],
+    galleryImages:['images/catalog-toyota-sienna-2021-01.jpg']},
+  {id:'catalog-toyota-rav4',make:'Toyota',model:'RAV4',year:2022,trim:'Hybrid XLE AWD',bodyType:'Crossover',fuelType:'Hybrid',engine:'2.5L Hybrid I4',transmission:'e-CVT',mileage:45000,mileageUnit:'km',color:'Silver Sky Metallic',location:'North America sourcing network',basePriceUSD:25000,price:Math.round(25000*1.15),currency:'USD',availabilityStatus:'Sourced to Order',catalogOnly:true,reviewCount:0,rating:0,
+    specs:{'Drive':'AWD','Doors':4,'Seats':5,'Trim':'XLE Hybrid'},
+    inspection:['Every unit we source goes through our full mechanical, cosmetic and title-history inspection before it ships','Photo shown is a reference vehicle of this exact model/trim — your specific unit’s inspection report is provided once sourced'],
+    importNotes:['Left-hand drive, Nigeria-compliant','Consistently one of our most-requested models'],
+    reviews:[],
+    galleryImages:['images/catalog-toyota-rav4-2022-01.jpg']},
+  {id:'catalog-honda-crv',make:'Honda',model:'CR-V',year:2023,trim:'EX-L AWD',bodyType:'SUV',fuelType:'Petrol',engine:'1.5L Turbo I4',transmission:'CVT',mileage:20000,mileageUnit:'km',color:'Sonic Grey Pearl',location:'North America sourcing network',basePriceUSD:26000,price:Math.round(26000*1.15),currency:'USD',availabilityStatus:'Sourced to Order',catalogOnly:true,reviewCount:0,rating:0,
+    specs:{'Drive':'AWD','Doors':4,'Seats':5,'Trim':'EX-L'},
+    inspection:['Every unit we source goes through our full mechanical, cosmetic and title-history inspection before it ships','Photo shown is a reference vehicle of this exact model/trim — your specific unit’s inspection report is provided once sourced'],
+    importNotes:['Left-hand drive, Nigeria-compliant','Strong resale demand in the Nigerian market'],
+    reviews:[],
+    galleryImages:['images/catalog-honda-crv-2023-01.jpg']},
+  {id:'catalog-honda-pilot',make:'Honda',model:'Pilot',year:2023,trim:'Touring AWD',bodyType:'SUV',fuelType:'Petrol',engine:'3.5L V6',transmission:'10-Speed Automatic',mileage:15000,mileageUnit:'km',color:'Platinum White Pearl',location:'North America sourcing network',basePriceUSD:34000,price:Math.round(34000*1.15),currency:'USD',availabilityStatus:'Sourced to Order',catalogOnly:true,reviewCount:0,rating:0,
+    specs:{'Drive':'AWD','Doors':4,'Seats':8,'Trim':'Touring'},
+    inspection:['Every unit we source goes through our full mechanical, cosmetic and title-history inspection before it ships','Photo shown is a reference vehicle of this exact model/trim — your specific unit’s inspection report is provided once sourced'],
+    importNotes:['Left-hand drive, Nigeria-compliant','8-seat family SUV — popular for extended-family households'],
+    reviews:[],
+    galleryImages:['images/catalog-honda-pilot-2023-01.jpg']},
+  {id:'catalog-lexus-rx350',make:'Lexus',model:'RX 350',year:2023,trim:'Premium Plus AWD',bodyType:'SUV',fuelType:'Petrol',engine:'2.4L Turbo I4',transmission:'8-Speed Direct-Shift Automatic',mileage:18000,mileageUnit:'km',color:'Matador Red Mica',location:'North America sourcing network',basePriceUSD:42000,price:Math.round(42000*1.15),currency:'USD',availabilityStatus:'Sourced to Order',catalogOnly:true,reviewCount:0,rating:0,
+    specs:{'Drive':'AWD','Doors':4,'Seats':5,'Trim':'Premium Plus'},
+    inspection:['Every unit we source goes through our full mechanical, cosmetic and title-history inspection before it ships','Photo shown is a reference vehicle of this exact model/trim — your specific unit’s inspection report is provided once sourced'],
+    importNotes:['Left-hand drive, Nigeria-compliant','High resale demand — one of the most requested luxury SUVs we source'],
+    reviews:[],
+    galleryImages:['images/catalog-lexus-rx350-2023-01.jpg']},
+  {id:'catalog-toyota-landcruiser-prado',make:'Toyota',model:'Land Cruiser Prado',year:2023,trim:'VX-L',bodyType:'SUV',fuelType:'Diesel',engine:'2.8L Turbo-Diesel I4',transmission:'6-Speed Automatic',mileage:25000,mileageUnit:'km',color:'Silver Metallic',location:'EU / international sourcing network',basePriceUSD:45000,price:Math.round(45000*1.15),currency:'USD',availabilityStatus:'Sourced to Order',catalogOnly:true,reviewCount:0,rating:0,
+    specs:{'Drive':'4WD (dual-range)','Doors':4,'Seats':7,'Trim':'VX-L'},
+    inspection:['Every unit we source goes through our full mechanical, cosmetic and title-history inspection before it ships','Photo shown is a reference vehicle of this exact model/trim — your specific unit’s inspection report is provided once sourced'],
+    importNotes:['Left-hand drive, Nigeria-compliant','A perennial favorite for Nigerian roads — high demand, we recommend requesting early'],
+    reviews:[],
+    galleryImages:['images/catalog-toyota-landcruiser-prado-2023-01.jpg']},
+  {id:'catalog-mercedes-cclass',make:'Mercedes-Benz',model:'C 300',year:2022,trim:'4MATIC',bodyType:'Sedan',fuelType:'Petrol',engine:'2.0L Turbo I4 (mild-hybrid)',transmission:'9G-TRONIC 9-Speed Automatic',mileage:30000,mileageUnit:'km',color:'Designo Patagonia Red',location:'North America sourcing network',basePriceUSD:33000,price:Math.round(33000*1.15),currency:'USD',availabilityStatus:'Sourced to Order',catalogOnly:true,reviewCount:0,rating:0,
+    specs:{'Drive':'AWD (4MATIC)','Doors':4,'Seats':5,'Trim':'4MATIC'},
+    inspection:['Every unit we source goes through our full mechanical, cosmetic and title-history inspection before it ships','Photo shown is a reference vehicle of this exact model/trim — your specific unit’s inspection report is provided once sourced'],
+    importNotes:['Left-hand drive, Nigeria-compliant','Popular executive sedan pick — confirm service network before purchase'],
+    reviews:[],
+    galleryImages:['images/catalog-mercedes-cclass-2022-01.jpg']}
 ];
 
 const state = {
@@ -828,20 +783,18 @@ const state = {
   view:'grid',
   wishlist:new Set(),
   compare:new Set(),
-  loading:false,
-  chatDept:'Sales',
-  chatCarContext:null,
-  chatHistory:[]
+  loading:false
 };
 
 /* ---------- helpers ---------- */
 function money(n){return '$'+n.toLocaleString('en-US');}
 function statusBadge(s){
-  const cls = s==='Available'?'badge-available':s==='Reserved'?'badge-reserved':'badge-sold';
+  const cls = s==='Available'?'badge-available':s==='Reserved'?'badge-reserved':s==='Sourced to Order'?'badge-catalog':'badge-sold';
   return `<span class="badge ${cls}">${s}</span>`;
 }
 function ctaForStatus(car){
   if(car.availabilityStatus==='Available') return `<button class="btn btn-primary btn-sm btn-block" onclick="openLeadFor('${car.id}')">Request this car</button>`;
+  if(car.availabilityStatus==='Sourced to Order') return `<button class="btn btn-primary btn-sm btn-block" onclick="openLeadFor('${car.id}')">Request this model</button>`;
   if(car.availabilityStatus==='Reserved') return `<button class="btn btn-secondary btn-sm btn-block" onclick="openLeadFor('${car.id}','alt')">Ask for alternatives</button>`;
   return `<button class="btn btn-secondary btn-sm btn-block" onclick="openLeadFor('${car.id}','waitlist')">Join waitlist</button>`;
 }
@@ -899,15 +852,16 @@ function carCardHTML(car, idx){
       <div>
         <div class="car-title">${car.year} ${car.make} ${car.model}</div>
         <div class="car-sub">${car.trim} · ${car.location}</div>
+        ${car.catalogOnly ? `<div class="catalog-note">Reference photo · exact unit sourced to your spec</div>` : ''}
       </div>
-      ${car.reviewCount>0 ? `${starRow(car.rating)} <span style="font-size:.72rem;color:var(--text-faint)">(${car.reviewCount} reviews)</span>` : `<span class="spec-chip" style="color:var(--gold);border-color:var(--gold-dim);">New listing</span>`}
+      ${car.reviewCount>0 ? `${starRow(car.rating)} <span style="font-size:.72rem;color:var(--text-faint)">(${car.reviewCount} reviews)</span>` : car.catalogOnly ? '' : `<span class="spec-chip" style="color:var(--gold);border-color:var(--gold-dim);">New listing</span>`}
       <div class="chip-row">
         <span class="spec-chip">${ICONS.mileage}${car.mileage.toLocaleString()} ${car.mileageUnit||'mi'}</span>
         <span class="spec-chip">${ICONS.transmission}${car.transmission.split(' ')[0]}</span>
         <span class="spec-chip">${ICONS.fuel}${car.fuelType}</span>
       </div>
       <div class="car-foot">
-        <div class="car-price">${money(car.price)}<small>landed cost varies by state</small></div>
+        <div class="car-price">${car.catalogOnly?'From ':''}${money(car.price)}<small>landed cost varies by state</small></div>
       </div>
       <div>${ctaForStatus(car)}</div>
       <label class="compare-check">
@@ -964,11 +918,12 @@ document.getElementById('compareClearBtn').addEventListener('click',()=>{state.c
    ============================================================ */
 function pageHome(){
   const featured = CARS.filter(c=>c.availabilityStatus==='Available').slice(0,3);
+  const popularModels = CARS.filter(c=>c.catalogOnly).slice(0,3);
   return `
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <div class="hero-badge">${ICONS.check} 500+ vehicles verified &amp; shipped</div>
+        <div class="hero-badge">${ICONS.check} Every car independently inspected before it ships</div>
         <h1 class="h1">Import your next car <span class="accent">with total clarity.</span></h1>
         <p class="lede">ELOVAN sources, inspects and ships cars from Europe and North America straight to Nigeria — with transparent pricing, real inspection reports, and a team you can actually reach.</p>
         <div class="hero-ctas">
@@ -977,14 +932,13 @@ function pageHome(){
         </div>
         <div class="hero-stats">
           <div class="hero-stat"><b>12–16</b><span>WKS AVG. DELIVERY</span></div>
-          <div class="hero-stat"><b>4.6★</b><span>AVG. CAR RATING</span></div>
-          <div class="hero-stat"><b>${CARS.length*40}+</b><span>UNITS SOURCED YTD</span></div>
+          <div class="hero-stat"><b>${CARS.filter(c=>!c.catalogOnly).length}</b><span>VERIFIED CARS IN HAND</span></div>
+          <div class="hero-stat"><b>${CARS.filter(c=>c.catalogOnly).length}+</b><span>POPULAR MODELS WE SOURCE</span></div>
         </div>
       </div>
       <div class="hero-visual hud-frame hud-active">
         <span class="hud-c1"></span><span class="hud-c2"></span><span class="hud-scan"></span>
-        <div class="plate"></div><div class="glow"></div>
-        <div class="carsvg">${carSVG()}</div>
+        <img src="images/audi-a7-2013-01-front-street.jpg" alt="Audi A7 sourced by ELOVAN" loading="eager" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
         <div class="hud-readout"><span>STATUS · VERIFIED</span><span>ORIGIN · EU / NA</span></div>
       </div>
     </div>
@@ -996,6 +950,14 @@ function pageHome(){
       <a href="#/cars" class="btn btn-ghost">View all inventory →</a>
     </div>
     <div class="grid-cars">${featured.map((c,i)=>carCardHTML(c,i)).join('')}</div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;">
+      <div><div class="eyebrow">Sourced to order</div><h2 class="h2">Popular models we source for Nigeria</h2><p class="lede" style="margin-top:8px;">Tell us the year, trim and budget — we'll find and inspect a matching unit.</p></div>
+      <a href="#/cars" class="btn btn-ghost">See full catalog →</a>
+    </div>
+    <div class="grid-cars">${popularModels.map((c,i)=>carCardHTML(c,i)).join('')}</div>
   </section>
 
   <section class="section container">
@@ -1026,11 +988,11 @@ function pageHome(){
   </section>
 
   <section class="section container">
-    <div class="section-head"><div class="eyebrow">Buyers like you</div><h2 class="h2">What people are saying</h2></div>
+    <div class="section-head"><div class="eyebrow">Our commitment</div><h2 class="h2">What you can expect, every time</h2></div>
     <div class="testi-row">
-      <div class="testi-card">${starRow(5)}<p>"I compared four importers before choosing ELOVAN — the inspection report on my RAV4 was the most detailed by far."</p><div class="testi-who"><div class="testi-avatar">LD</div><div><b>L. Dauda</b><span>Lagos, Nigeria</span></div></div></div>
-      <div class="testi-card">${starRow(5)}<p>"The chat widget tagged my car automatically when I asked a question — got a real answer within minutes."</p><div class="testi-who"><div class="testi-avatar">KN</div><div><b>K. Nwosu</b><span>Abuja, Nigeria</span></div></div></div>
-      <div class="testi-card">${starRow(4)}<p>"Shipping took a little longer than the low end of the estimate, but they explained why and kept me posted the whole way."</p><div class="testi-who"><div class="testi-avatar">BA</div><div><b>B. Afolabi</b><span>Port Harcourt, Nigeria</span></div></div></div>
+      <div class="testi-card"><div class="spec-chip" style="color:var(--teal-strong);border-color:var(--teal-line);margin-bottom:10px;display:inline-flex;">${ICONS.check}&nbsp;Inspection</div><p>Every car we source is independently inspected — mechanical, cosmetic and title history — before it ships. You get the full report in writing.</p></div>
+      <div class="testi-card"><div class="spec-chip" style="color:var(--teal-strong);border-color:var(--teal-line);margin-bottom:10px;display:inline-flex;">${ICONS.check}&nbsp;Pricing</div><p>No hidden markups revealed later. You see the full landed-cost breakdown — vehicle, shipping, and customs estimate — before you pay anything.</p></div>
+      <div class="testi-card"><div class="spec-chip" style="color:var(--teal-strong);border-color:var(--teal-line);margin-bottom:10px;display:inline-flex;">${ICONS.check}&nbsp;Communication</div><p>You talk to the same team from quote to delivery — by phone, WhatsApp, or a scheduled call. No call centers, no bots.</p></div>
     </div>
   </section>
 
@@ -1104,7 +1066,8 @@ function pageCars(){
         <div class="filter-group"><input class="field" id="fMileage" placeholder="e.g. 30000" value="${state.filters.mileageMax}"></div>
         <h4>Availability</h4>
         <div class="filter-group chip-toggle-row" id="fAvail">
-          <button class="chip-toggle ${state.filters.availability==='Available'?'active':''}" data-val="Available">Available</button>
+          <button class="chip-toggle ${state.filters.availability==='Available'?'active':''}" data-val="Available">Available now</button>
+          <button class="chip-toggle ${state.filters.availability==='Sourced to Order'?'active':''}" data-val="Sourced to Order">Sourced to order</button>
           <button class="chip-toggle ${state.filters.availability==='Reserved'?'active':''}" data-val="Reserved">Reserved</button>
           <button class="chip-toggle ${state.filters.availability==='Sold'?'active':''}" data-val="Sold">Sold</button>
         </div>
@@ -1272,14 +1235,15 @@ function pageCarDetail(id){
             <h1 class="h3" style="font-size:1.5rem;">${car.year} ${car.make} ${car.model}</h1>
             <div class="car-sub">${car.trim} · ${car.color}</div>
           </div>
-          <div class="price-block"><div class="amt">${money(car.price)}</div><small>landed cost varies by state</small></div>
+          <div class="price-block"><div class="amt">${car.catalogOnly?'From ':''}${money(car.price)}</div><small>landed cost varies by state</small></div>
         </div>
+        ${car.catalogOnly ? `<p class="lede" style="font-size:.85rem;margin-top:6px;">This photo shows a reference example of this model/trim — not the exact physical unit. Tell us your preferred year, trim and mileage and we'll source and inspect a matching car for you.</p>` : ''}
 
         <div class="avail-module">
-          <div class="status-row">${statusBadge(car.availabilityStatus)} <span style="font-size:.82rem;color:var(--text-muted);">${car.availabilityStatus==='Available'?'Ready to request now':car.availabilityStatus==='Reserved'?'Currently on hold for another buyer':'No longer available'}</span></div>
-          <p class="hint">${car.availabilityStatus==='Available'?'Submit a request and our team confirms details within one business day.':car.availabilityStatus==='Reserved'?'We can show you similar verified vehicles right away.':'Join the waitlist to be notified when a similar unit is sourced.'}</p>
+          <div class="status-row">${statusBadge(car.availabilityStatus)} <span style="font-size:.82rem;color:var(--text-muted);">${car.availabilityStatus==='Available'?'Ready to request now':car.availabilityStatus==='Sourced to Order'?'Sourced fresh to your exact spec':car.availabilityStatus==='Reserved'?'Currently on hold for another buyer':'No longer available'}</span></div>
+          <p class="hint">${car.availabilityStatus==='Available'?'Submit a request and our team confirms details within one business day.':car.availabilityStatus==='Sourced to Order'?'Submit a request with your preferred spec and budget — we’ll source and inspect a matching unit and confirm full pricing before you commit.':car.availabilityStatus==='Reserved'?'We can show you similar verified vehicles right away.':'Join the waitlist to be notified when a similar unit is sourced.'}</p>
           ${ctaForStatus(car)}
-          <button class="btn btn-secondary btn-block" style="margin-top:8px;" onclick="openChatWithCar('${car.id}')">Ask about this exact car (live chat)</button>
+          <button class="btn btn-secondary btn-block" style="margin-top:8px;" onclick="openChatWithCar('${car.id}')">Ask about this exact car (WhatsApp)</button>
           <button class="btn btn-secondary btn-block" style="margin-top:8px;" onclick="openWhatsApp('Hi ELOVAN, I\u2019m asking about the ${car.year} ${car.make} ${car.model} (listing #${car.id}).')">Ask on WhatsApp</button>
           <a class="btn btn-ghost btn-block" style="margin-top:4px;" href="tel:+16132205445">Call: +1 613 220 5445</a>
         </div>
@@ -1467,6 +1431,40 @@ function pageFAQ(){
     <div style="margin-top:var(--sp-5);">${leadBlockHTML('faq')}</div>
   </section>`;
 }
+function pagePrivacy(){
+  return `
+  <section class="section container">
+    <a href="#/" class="btn-ghost" style="display:inline-flex;margin-bottom:var(--sp-2);">← Back home</a>
+    <div class="section-head"><div class="eyebrow">Legal</div><h2 class="h2">Privacy policy</h2><p class="lede" style="margin-top:8px;">Last updated ${new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'})}. This is a plain-language summary — not a substitute for legal advice.</p></div>
+    <div class="side-card" style="max-width:72ch;">
+      <h4>What we collect</h4>
+      <p class="lede" style="margin:8px 0 16px;">When you submit a quote request, contact form, or chat with us, we collect the details you provide — name, phone/WhatsApp number, city/state, budget, timeline, and any message you send. We don't collect payment or ID details through this website.</p>
+      <h4>How we use it</h4>
+      <p class="lede" style="margin:8px 0 16px;">We use your information only to respond to your inquiry, prepare quotes, and coordinate sourcing and shipping if you proceed with a purchase. We don't sell your information to third parties.</p>
+      <h4>Where it goes</h4>
+      <p class="lede" style="margin:8px 0 16px;">Form submissions are delivered to our team via Formspree and to our business email. Formspree's own privacy practices apply to data in transit — see <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener" style="color:var(--teal-strong);">formspree.io/legal/privacy-policy</a>.</p>
+      <h4>Your choices</h4>
+      <p class="lede" style="margin:8px 0 0;">To ask what we hold about you, or to request deletion, contact us at <a href="tel:+16132205445" style="color:var(--teal-strong);">+1 613 220 5445</a> or via WhatsApp and we'll action it promptly.</p>
+    </div>
+  </section>`;
+}
+function pageTerms(){
+  return `
+  <section class="section container">
+    <a href="#/" class="btn-ghost" style="display:inline-flex;margin-bottom:var(--sp-2);">← Back home</a>
+    <div class="section-head"><div class="eyebrow">Legal</div><h2 class="h2">Terms of service</h2><p class="lede" style="margin-top:8px;">Last updated ${new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'})}. This is a plain-language summary — not a substitute for legal advice.</p></div>
+    <div class="side-card" style="max-width:72ch;">
+      <h4>Listings on this site</h4>
+      <p class="lede" style="margin:8px 0 16px;">Cars marked <b>Available</b>, <b>Reserved</b> or <b>Sold</b> are specific units we have physically sourced and inspected. Cars marked <b>Sourced to Order</b> are catalog examples of models we regularly source — the photo is a representative reference vehicle, not the exact unit you'll receive; final year, trim, mileage and price are confirmed with you before you commit to anything.</p>
+      <h4>Pricing</h4>
+      <p class="lede" style="margin:8px 0 16px;">Prices shown are estimates in USD and exclude shipping, customs duty, and local clearance fees, which vary by vehicle and destination port. We provide a full landed-cost breakdown in writing before you pay anything.</p>
+      <h4>No obligation to purchase</h4>
+      <p class="lede" style="margin:8px 0 16px;">Submitting a quote request or talking to our team does not commit you to a purchase. We'll only proceed with sourcing once you confirm in writing.</p>
+      <h4>Contact</h4>
+      <p class="lede" style="margin:8px 0 0;">Questions about these terms — reach us at <a href="tel:+16132205445" style="color:var(--teal-strong);">+1 613 220 5445</a> or via WhatsApp.</p>
+    </div>
+  </section>`;
+}
 function wireAccordion(){
   document.querySelectorAll('.accordion-item button').forEach(btn=>{
     btn.addEventListener('click',()=>{
@@ -1492,10 +1490,10 @@ function pageContact(){
       <div>
         <div class="side-card">
           <h4>Direct contact</h4>
-          <p class="lede" style="font-size:.88rem;margin-bottom:10px;">Our team responds fastest over WhatsApp and live chat during business hours (WAT).</p>
+          <p class="lede" style="font-size:.88rem;margin-bottom:10px;">Our team responds fastest over WhatsApp during business hours (WAT).</p>
           <a class="btn btn-primary btn-block" href="tel:+16132205445" style="margin-bottom:8px;">Call: +1 613 220 5445</a>
           <button class="btn btn-secondary btn-block" style="margin-bottom:8px;" onclick="openWhatsApp('Hi ELOVAN, I\u2019d like to get in touch.')">WhatsApp us</button>
-          <button class="btn btn-ghost btn-block" onclick="openLiveChat()">Start a live chat</button>
+          <button class="btn btn-ghost btn-block" onclick="openWhatsApp('Hi ELOVAN, I’d like to get in touch.')">Start a WhatsApp chat</button>
         </div>
         <div class="side-card">
           <h4>Office &amp; sourcing hubs</h4>
@@ -1505,8 +1503,9 @@ function pageContact(){
             <li><span>EU sourcing hub</span><b>Remote network</b></li>
           </div>
         </div>
-        <div class="side-card" style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:.8rem;font-family:var(--font-mono);background:var(--bg-alt);">
-          MAP PLACEHOLDER
+        <div class="side-card">
+          <h4>No walk-in showroom — by design</h4>
+          <p class="lede" style="font-size:.85rem;">We run lean on purpose so more of your budget goes into the car, not overhead. Every conversation happens by phone, WhatsApp or video call — you'll always talk to the same team from quote to delivery.</p>
         </div>
       </div>
     </div>
@@ -1599,7 +1598,7 @@ function leadBlockHTML(ctx){
    Until then, forms fall back to opening a pre-filled email draft so
    nothing is silently lost.
    ============================================================ */
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/your_form_id'; // TODO: replace your_form_id after creating a Formspree form for d1unlimited12@yahoo.ca
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xoeqaoaz';
 const FALLBACK_EMAIL = 'd1unlimited12@yahoo.ca';
 
 function wireLeadForms(){
@@ -1645,7 +1644,7 @@ function wireLeadForms(){
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
 
-      const usingRealEndpoint = !FORMSPREE_ENDPOINT.includes('your_form_id');
+      const usingRealEndpoint = true;
 
       try{
         if(usingRealEndpoint){
@@ -1681,108 +1680,15 @@ function openLeadFor(carId, mode){
 }
 
 /* ============================================================
-   WHATSAPP + LIVE CHAT WIRING (Firebase Realtime Database)
-   Each visitor gets an anonymous Firebase Auth session + a
-   conversation node keyed by their uid. Messages sync in real
-   time both ways — visitor sends here, you reply from admin.html.
+   WHATSAPP WIRING — real-time contact channel (no third-party
+   backend to configure; messages open directly in WhatsApp).
    ============================================================ */
-let chatConvId = null;
-let chatMessagesRef = null;
-let chatUnsub = null;
-
-function chatEnsureSession(){
-  return new Promise((resolve)=>{
-    if(chatAuth.currentUser){ chatConvId = chatAuth.currentUser.uid; resolve(chatConvId); return; }
-    chatAuth.onAuthStateChanged(user=>{
-      if(user){
-        chatConvId = user.uid;
-        chatDb.ref('conversations/'+chatConvId).once('value').then(snap=>{
-          if(!snap.exists()){
-            chatDb.ref('conversations/'+chatConvId).set({
-              createdAt: firebase.database.ServerValue.TIMESTAMP,
-              lastMessageAt: firebase.database.ServerValue.TIMESTAMP,
-              visitorName: 'Website visitor',
-              dept: state.chatDept || 'Sales',
-              carContext: state.chatCarContext || null,
-              unreadByAdmin: true
-            });
-          }
-        });
-        resolve(chatConvId);
-      }
-    });
-    if(!chatAuth.currentUser) chatAuth.signInAnonymously().catch(err=>{
-      document.getElementById('chatBody').innerHTML = `<div class="chat-fallback">Live chat is temporarily unavailable — please <a href="#" onclick="openWhatsApp('Hi ELOVAN, I have a question.');return false;">message us on WhatsApp</a> instead.</div>`;
-      console.error('Firebase auth error', err);
-    });
-  });
-}
-
-function chatRenderMessage(m){
-  const mine = m.sender === 'visitor';
-  const wrap = document.createElement('div');
-  wrap.style.cssText = `align-self:${mine?'flex-end':'flex-start'};max-width:80%;`;
-  wrap.innerHTML = `<div style="background:${mine?'var(--teal)':'var(--surface-2)'};color:${mine?'#fff':'var(--text)'};padding:8px 12px;border-radius:12px;font-size:.85rem;line-height:1.4;">${(m.text||'').replace(/</g,'&lt;')}</div>`;
-  return wrap;
-}
-
-function chatListen(){
-  const body = document.getElementById('chatBody');
-  if(chatUnsub) chatUnsub();
-  chatMessagesRef = chatDb.ref('conversations/'+chatConvId+'/messages').orderByChild('ts');
-  const handler = snap => {
-    body.innerHTML = '';
-    let any=false;
-    snap.forEach(child=>{
-      any=true;
-      body.appendChild(chatRenderMessage(child.val()));
-    });
-    if(!any) body.innerHTML = `<div class="chat-fallback">Send us a message and a real member of the ELOVAN team will reply here — no bots.</div>`;
-    body.scrollTop = body.scrollHeight;
-  };
-  chatMessagesRef.on('value', handler);
-  chatUnsub = () => chatMessagesRef.off('value', handler);
-}
-
-function chatSendMessage(text){
-  if(!text || !text.trim() || !chatConvId) return;
-  chatDb.ref('conversations/'+chatConvId+'/messages').push({
-    sender:'visitor', text: text.trim(), ts: firebase.database.ServerValue.TIMESTAMP
-  });
-  chatDb.ref('conversations/'+chatConvId).update({
-    lastMessageAt: firebase.database.ServerValue.TIMESTAMP,
-    unreadByAdmin: true,
-    lastMessagePreview: text.trim().slice(0,140)
-  });
-}
-
-async function openLiveChat(context){
-  document.getElementById('chatPanel').classList.add('open');
-  const ctxLine = document.getElementById('chatContextLine');
-  if(context){
-    ctxLine.style.display='block';
-    ctxLine.textContent = 'Re: ' + context;
-    state.chatCarContext = context;
-  }
-  await chatEnsureSession();
-  if(context && chatConvId){ chatDb.ref('conversations/'+chatConvId).update({carContext: context}); }
-  chatListen();
-}
-document.getElementById('chatFab').addEventListener('click', ()=>openLiveChat());
-document.getElementById('chatClose').addEventListener('click', ()=>document.getElementById('chatPanel').classList.remove('open'));
-document.getElementById('chatSend').addEventListener('click', ()=>{
-  const input = document.getElementById('chatInput');
-  chatSendMessage(input.value);
-  input.value='';
-});
-document.getElementById('chatInput').addEventListener('keydown', e=>{
-  if(e.key==='Enter'){ chatSendMessage(e.target.value); e.target.value=''; }
-});
+document.getElementById('chatFab').addEventListener('click', ()=>openWhatsApp('Hi ELOVAN, I have a question about a car.'));
 
 function openChatWithCar(carId){
   const car=CARS.find(c=>c.id===carId);
   if(!car) return;
-  openLiveChat(`${car.year} ${car.make} ${car.model} (#${car.id})`);
+  openWhatsApp(`Hi ELOVAN, I’m asking about the ${car.year} ${car.make} ${car.model} (listing #${car.id}).`);
 }
 const mobileWa=document.getElementById('mobileWhatsappBtn');
 if(mobileWa) mobileWa.addEventListener('click',e=>{ e.preventDefault(); openWhatsApp('Hi ELOVAN, I have a question about a car.'); });
@@ -1822,6 +1728,8 @@ function render(){
   else if(route==='/shipping') html=pageShipping();
   else if(route==='/faq') html=pageFAQ();
   else if(route==='/contact') html=pageContact();
+  else if(route==='/privacy') html=pagePrivacy();
+  else if(route==='/terms') html=pageTerms();
   else html=`<div class="section container"><div class="empty-state">${ICONS.empty}<h4>Page not found</h4><a class="btn btn-secondary btn-sm" href="#/">Go home</a></div></div>`;
   app.innerHTML = html;
   window.scrollTo({top:0,behavior:'instant' in window ? 'instant' : 'auto'});

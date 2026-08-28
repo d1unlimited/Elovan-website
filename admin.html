@@ -147,20 +147,23 @@
     document.querySelectorAll('.conv-item').forEach(el=>el.classList.toggle('active', el.dataset.id===convId));
     db.ref('conversations/'+convId).update({ unreadByAdmin: false });
 
+    // Build the pane synchronously first, so #msgs exists before the messages
+    // listener below ever fires — otherwise a fast 'value' event can arrive
+    // before this DOM is ready and the messages silently never render.
+    document.getElementById('chatPane').innerHTML = `
+      <div class="chat-pane-head" id="chatPaneHead"><b>Visitor</b></div>
+      <div class="msgs" id="msgs"></div>
+      <div class="reply-row">
+        <input type="text" id="replyInput" placeholder="Type a reply…">
+        <button id="replySend">Send</button>
+      </div>`;
+    document.getElementById('replySend').addEventListener('click', sendReply);
+    document.getElementById('replyInput').addEventListener('keydown', e=>{ if(e.key==='Enter') sendReply(); });
+
     db.ref('conversations/'+convId).once('value').then(snap=>{
       const c = snap.val() || {};
-      document.getElementById('chatPane').innerHTML = `
-        <div class="chat-pane-head">
-          <b>${c.visitorName || 'Visitor'}</b>
-          ${c.carContext ? `<div class="ctx">${c.carContext}</div>` : ''}
-        </div>
-        <div class="msgs" id="msgs"></div>
-        <div class="reply-row">
-          <input type="text" id="replyInput" placeholder="Type a reply…">
-          <button id="replySend">Send</button>
-        </div>`;
-      document.getElementById('replySend').addEventListener('click', sendReply);
-      document.getElementById('replyInput').addEventListener('keydown', e=>{ if(e.key==='Enter') sendReply(); });
+      const head = document.getElementById('chatPaneHead');
+      if(head) head.innerHTML = `<b>${c.visitorName || 'Visitor'}</b>${c.carContext ? `<div class="ctx">${c.carContext}</div>` : ''}`;
     });
 
     if(activeMsgsRef) activeMsgsRef.off();
